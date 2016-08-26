@@ -9,6 +9,15 @@ public class GridBean implements Serializable {
     public static final long SeriaVersionUUID = 201605231223L;
     private String name;
     private int icon;
+    private int number;
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
 
     public int getIcon() {
         return icon;
