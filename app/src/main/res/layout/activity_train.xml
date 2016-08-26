@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/train"
+    android:orientation="vertical"
+    tools:context="com.example.michong_pc.tiku.function_activity.train">
+
+<include layout="@layout/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"/>
+<!--<GridView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:numColumns="1"-->
+    <!--android:id="@+id/gridview_tixing"-->
+    <!--android:horizontalSpacing="3dp"-->
+    <!--android:verticalSpacing="3dp"-->
+    <!--android:background="#C0C0C0"-->
+    <!--&gt;-->
+
+<!--</GridView>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:id="@+id/xuanze_L">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/tiankongti_icon"
+                android:layout_gravity="center"
+                android:translationX="-20dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="填    空    题"
+                android:textSize="30dp"
+                android:textColor="#32C0A6"
+                android:layout_gravity="center"
+                android:id="@+id/caiyun1"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="#BFBFBF"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:id="@+id/jisuanti_L">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/jisuanti_icon"
+                android:layout_gravity="center"
+                android:translationX="-20dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="计    算    题"
+                android:textSize="30dp"
+                android:textColor="#CAE4A1"
+                android:layout_gravity="center"
+                android:id="@+id/caiyun2"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="#BFBFBF"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:id="@+id/zhengmingti_L">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/zhengningti_icon"
+                android:translationX="-20dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="证    明    题"
+                android:textSize="30dp"
+                android:textColor="#F3A8AD"
+                android:layout_gravity="center"
+                android:id="@+id/caiyun3"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="#BFBFBF"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:id="@+id/zongheti_L">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/zongheti_icon"
+                android:layout_gravity="center"
+                android:translationX="-20dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="综    合    题"
+                android:textSize="30dp"
+                android:textColor="#C5BCDB"
+                android:layout_gravity="center"
+                android:id="@+id/caiyun4"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

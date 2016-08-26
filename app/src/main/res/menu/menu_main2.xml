@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.michong_pc.tiku.Main2Activity">
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@+id/menu_one"
+        android:orderInCategory="10"
+        android:title="one"
+        android:showAsAction="never"
+        />
+    <item
+        android:orderInCategory="10"
+        android:title="two"
+        android:showAsAction="never"/>
+
+</menu>
