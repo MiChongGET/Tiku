@@ -10,6 +10,7 @@ public class GridBean implements Serializable {
     private String name;
     private int icon;
     private int number;
+    
 
     public int getNumber() {
         return number;
