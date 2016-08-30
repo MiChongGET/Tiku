@@ -5,24 +5,21 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.example.michong_pc.tiku.R;
 import com.example.michong_pc.tiku.Result.Result_score;
-import com.example.michong_pc.tiku.adapter.BaseAdapter;
-import com.example.michong_pc.tiku.bean.GridBean;
-import com.example.michong_pc.tiku.bean.TestBean;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Test extends AppCompatActivity {
 
     private ListView lv ;
-    List<TestBean> beanList;
+    ImageView imageView;
+    RelativeLayout r1;
+    RelativeLayout r2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,35 +36,23 @@ public class Test extends AppCompatActivity {
             }
         });
 
-        /*l1 = (LinearLayout) findViewById(R.id.zhengti_exam);
-        l1.setOnClickListener(new View.OnClickListener() {
+        imageView = (ImageView) findViewById(R.id.image_test);
+        r1 = (RelativeLayout) findViewById(R.id.r1);
+        r1.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Test.this, Result_score.class));
             }
-        });*/
+        });
+        r2 = (RelativeLayout) findViewById(R.id.r2);
+        r2.setOnClickListener(new View.OnClickListener() {
 
-        lv = (ListView) findViewById(R.id.test_listView);
-        beanList = new ArrayList<>();
-        int [] icons  = {R.drawable.true_exam,R.drawable.suiji_exam};
-        for (int i = 0; i<icons.length;i++){
-            TestBean bean = new TestBean(icons[i]);
-            beanList.add(bean);
-        }
-        BaseAdapter baseAdapter = new BaseAdapter(this,beanList);
-        lv.setAdapter(baseAdapter);
-
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (position){
-                    case 0:
-                        startActivity(new Intent(Test.this,Result_score.class));
-                        break;
-                    case 1:
-                        startActivity(new Intent(Test.this,Result_score.class));
-                }
+            public void onClick(View v) {
+                startActivity(new Intent(Test.this, Result_score.class));
             }
         });
-    }
+
+  }
 }
