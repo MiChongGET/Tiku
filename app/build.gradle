@@ -27,5 +27,6 @@ dependencies {
     compile 'com.google.android.gms:play-services-auth:8.4.0'
     compile 'com.google.android.gms:play-services-gcm:8.4.0'
     compile 'com.aurelhubert:ahbottomnavigation:0.1.3'
+    compile 'io.github.kexanie.library:MathView:0.0.6'
     compile files('libs/nineoldandroids.jar')
 }

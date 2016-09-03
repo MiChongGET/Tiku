@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".function_activity.train" />
-        <activity android:name=".function_activity.ZuoTiBan" />
+        <activity android:name=".function_activity.ZuoTiBan" android:windowSoftInputMode="adjustPan|stateHidden"  />
         <activity android:name=".function_activity.Zuotiban_tiankongti" />
         <activity android:name=".Result.Result_score" />
         <activity android:name=".function_activity.Test"></activity>
