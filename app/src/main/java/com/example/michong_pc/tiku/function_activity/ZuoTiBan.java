@@ -2,6 +2,7 @@ package com.example.michong_pc.tiku.function_activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -13,10 +14,14 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.michong_pc.tiku.R;
 import com.example.michong_pc.tiku.ViewFlipper.MyViewFlipper;
 import com.example.michong_pc.tiku.drawlibrary.DrawerLayout;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,7 +43,7 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
     private int currentNumber;
     private TextView page;
     private TextView page_total;
-    private int total=11;
+    private int total = 11;
     private EditText editText;
     private DrawerLayout mDrawerLayout;
     private LinearLayout mNumberLayout;
@@ -48,12 +53,15 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
     private boolean isClosed = false;
 
     private MathView mathView;
+    private MathView mathView2;
     private String answer = "This come from string. You can insert inline formula:" +
             " \\(ax^2 + bx + c = 0\\) " +
             "or displayed formula: $$\\sum_{i=0}^n i^2 = \\frac{(n^2+n)(2n+1)}{6}$$";
 
     private String question;
     private String answer2;
+    private String input = "";
+    private String result = "";
 
 
     @Override
@@ -62,7 +70,7 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
         setContentView(R.layout.activity_zuo_ti_ban);
         //传递第几套的数值
         Intent intent = getIntent();
-        Bundle b= intent.getExtras();
+        Bundle b = intent.getExtras();
         Toolbar toolbar = (Toolbar) findViewById(R.id.id_tool_bar);
         toolbar.setTitle(b.getString("capter"));
         setSupportActionBar(toolbar);
@@ -74,14 +82,9 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
             }
         });
 
-        //答案显示
-        mathView = (MathView) findViewById(R.id.answer);
-        mathView.setText(answer);
-
-
 
         //题号，默认是第一题
-        currentNumber =1;
+        currentNumber = 1;
         myViewFlipper = (MyViewFlipper) findViewById(R.id.body_flipper);
         myViewFlipper.setOnViewFlipperListener(this);
         myViewFlipper.addView(createView(currentNumber));
@@ -92,24 +95,21 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.dial_drawer);
         mDrawerLayout.setInitialState(DrawerLayout.State.Close); //set drawer initial state: open or close
-        mDrawerLayout.setDrawerListener(new DrawerLayout.DrawerListener()
-        {
+        mDrawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
-            public void drawerOpened()
-            {}
+            public void drawerOpened() {
+            }
+
             @Override
-            public void drawerClosed()
-            {}
+            public void drawerClosed() {
+            }
         });
-
-
-
     }
 
-    private View createView(int currentNumber){
+    private View createView(final int currentNumber) {
 
         //创建一个线程，里面包含了JSON数据解析
-        new Thread(){
+        new Thread() {
             @Override
             public void run() {
                 //JSON数据解析
@@ -120,25 +120,50 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setDoInput(true);
                     conn.setRequestMethod("GET");
-                    InputStreamReader isr= new InputStreamReader(conn.getInputStream());
+                    InputStreamReader isr = new InputStreamReader(conn.getInputStream());
                     BufferedReader bufferedReader = new BufferedReader(isr);
-                    String input="" ;
-                    String result="";
-                    while ((input=bufferedReader.readLine())!=null){
+
+                    while ((input = bufferedReader.readLine()) != null) {
                         //得到整个页面的字符
-                        result+=input;
+                        result += input;
                     }
-                    Log.i("返回结果",result);
+                    Log.i("返回结果", result);
                     JSONObject jsonObject = new JSONObject(result);
                     String error_code = jsonObject.getString("error_code");
-                    Log.i("调试结果",error_code);
+                    Log.i("调试结果", error_code);
+
 
                     JSONArray jsonArray = jsonObject.getJSONArray("result");
+
+                    //获取题目的数目
+                    int question_number=jsonArray.length();
+                    Log.i("共",""+question_number);
+
                     JSONObject json = jsonArray.getJSONObject(0);
-                    question=json.getString("question");
+                    question = json.getString("question");
                     answer2 = json.getString("answer");
-                    Log.i("第一题的题目：",question);
-                    Log.i("第一题的答案",answer2);
+                    Log.i("第一题的题目：", question);
+                    Log.i("第一题的答案", answer2);
+
+                    //在题板上添加问题
+                    mathView2 = (MathView) findViewById(R.id.question_ban);
+                    //这样写可以解决webview的异常,主要是多个webview不在同一个线程
+                    mathView2.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            mathView2.setText(question);
+                        }
+                    });
+
+                    //在答案板上添加答案
+                    mathView = (MathView) findViewById(R.id.answer);
+                    mathView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            mathView.setText(answer2);
+                        }
+                    });
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 } catch (MalformedURLException e) {
@@ -146,14 +171,13 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
             }
         }.start();
 
-
         LayoutInflater layoutInflater = LayoutInflater.from(this);
-        ScrollView resultView =(ScrollView) layoutInflater.inflate(R.layout.flipper_view,null);
-        ((TextView)resultView.findViewById(R.id.flipper_textView)).setText("1");
-        page= (TextView) findViewById(R.id.page);
+        ScrollView resultView = (ScrollView) layoutInflater.inflate(R.layout.flipper_view, null);
+        page = (TextView) findViewById(R.id.page);
         page.setText(String.valueOf(currentNumber));
         return resultView;
 
@@ -162,23 +186,26 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
     //获取下一个页面
     @Override
     public View getNextView() {
-        currentNumber  = currentNumber ==total ? 1:currentNumber +1;
+        currentNumber = currentNumber == total ? 1 : currentNumber + 1;
         return createView(currentNumber);
     }
+
     //获取上一个页面
     @Override
     public View getPreviousView() {
 
-        currentNumber = currentNumber ==1 ? total:currentNumber-1;
+        currentNumber = currentNumber == 1 ? total : currentNumber - 1;
         return createView(currentNumber);
     }
+
     //按钮控制得到上一个页面
-    public void prev(View source){
+    public void prev(View source) {
         myViewFlipper.flingToPrevious();
         myViewFlipper.stopFlipping();
     }
+
     //按钮获取下一个页面
-    public void next(View source){
+    public void next(View source) {
         myViewFlipper.flingToNext();
         myViewFlipper.stopFlipping();
     }
