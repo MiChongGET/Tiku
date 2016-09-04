@@ -23,11 +23,12 @@
             android:textSize="20dp"
             />
     </android.support.v7.widget.Toolbar>
-    <ImageView
+    <ViewFlipper
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:id="@+id/pic"
-        android:background="@drawable/pic"/>
+        android:background="@drawable/pic">
+        </ViewFlipper>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="5dp"

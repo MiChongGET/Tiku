@@ -9,10 +9,11 @@
         android:layout_height="match_parent"
         android:gravity="center"
         >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="50dp"
-            android:id="@+id/flipper_textView"/>
+         <io.github.kexanie.library.MathView
+             android:id="@+id/question_ban"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             >
+         </io.github.kexanie.library.MathView>
     </LinearLayout>
 </ScrollView>

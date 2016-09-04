@@ -12,7 +12,7 @@ public class JsonToString {
 
     public static void getString(){
         try {
-            JSONObject obj=new JSONObject("http://115.159.153.147/tk/admin.php/Library/api");
+            JSONObject obj=new JSONObject("");
 
              String error_code= obj.getString("error_code");
 

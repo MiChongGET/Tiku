@@ -74,7 +74,6 @@ public class Zuotiban_tiankongti extends AppCompatActivity implements MyViewFlip
 
         LayoutInflater layoutInflater = LayoutInflater.from(this);
         ScrollView resultView =(ScrollView) layoutInflater.inflate(R.layout.flipper_view,null);
-        ((TextView)resultView.findViewById(R.id.flipper_textView)).setText(currentNumber+"");
         page= (TextView) findViewById(R.id.page);
         page.setText(String.valueOf(currentNumber));
         return resultView;

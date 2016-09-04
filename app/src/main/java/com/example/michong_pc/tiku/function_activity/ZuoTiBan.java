@@ -54,9 +54,9 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
 
     private MathView mathView;
     private MathView mathView2;
-    private String answer = "This come from string. You can insert inline formula:" +
-            " \\(ax^2 + bx + c = 0\\) " +
-            "or displayed formula: $$\\sum_{i=0}^n i^2 = \\frac{(n^2+n)(2n+1)}{6}$$";
+//    private String answer = "This come from string. You can insert inline formula:" +
+//            " \\(ax^2 + bx + c = 0\\) " +
+//            "or displayed formula: $$\\sum_{i=0}^n i^2 = \\frac{(n^2+n)(2n+1)}{6}$$";
 
     private String question;
     private String answer2;
