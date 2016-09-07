@@ -20,14 +20,21 @@
             </intent-filter>
         </activity>
         <activity android:name=".function_activity.train" />
-        <activity android:name=".function_activity.ZuoTiBan" android:windowSoftInputMode="adjustPan|stateHidden"  />
-        <activity android:name=".function_activity.Zuotiban_tiankongti" />
+        <activity
+            android:name=".function_activity.ZuoTiBan"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".function_activity.Zuotiban_tiankongti"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity android:name=".Result.Result_score" />
-        <activity android:name=".function_activity.Test"></activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <activity android:name=".function_activity.Test_mode.Test" />
+        <activity android:name=".function_activity.Test_mode.Test_chooseBan"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+        <activity android:name=".function_activity.Test_mode.Test_chooce"></activity>
     </application>
 
 </manifest>

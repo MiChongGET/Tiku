@@ -1,8 +1,7 @@
-package com.example.michong_pc.tiku.function_activity;
+package com.example.michong_pc.tiku.function_activity.Test_mode;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -14,9 +13,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.michong_pc.tiku.R;
+import com.example.michong_pc.tiku.Result.Result_score;
 import com.example.michong_pc.tiku.ViewFlipper.MyViewFlipper;
 import com.example.michong_pc.tiku.drawlibrary.DrawerLayout;
 
@@ -25,9 +24,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -35,7 +32,7 @@ import java.net.URL;
 
 import io.github.kexanie.library.MathView;
 
-public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewFlipperListener {
+public class Test_chooseBan extends AppCompatActivity implements MyViewFlipper.OnViewFlipperListener {
     private MyViewFlipper myViewFlipper;
     private int currentNumber;
     private TextView page;
@@ -64,7 +61,7 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_zuo_ti_ban);
+        setContentView(R.layout.activity_testchooseban);
         //传递第几套的数值
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
@@ -75,7 +72,10 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                Intent intent = new Intent();
+                intent.setClass(Test_chooseBan.this,Result_score.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -216,7 +216,12 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        ZuoTiBan.this.finish();
+                        Intent intent = new Intent();
+                        intent.setClass(Test_chooseBan.this,Result_score.class);
+                        //杀掉其他运行的activity
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                        finish();
                     }
                 })
                 .setNeutralButton("取消", new DialogInterface.OnClickListener() {

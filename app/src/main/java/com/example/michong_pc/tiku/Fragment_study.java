@@ -14,7 +14,7 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.example.michong_pc.tiku.adapter.GridViewAdapter;
-import com.example.michong_pc.tiku.function_activity.Test;
+import com.example.michong_pc.tiku.function_activity.Test_mode.Test;
 import com.example.michong_pc.tiku.function_activity.train;
 import com.example.michong_pc.tiku.function_activity.zhangjiexunlian;
 

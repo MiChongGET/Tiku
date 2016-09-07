@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.michong_pc.tiku.function_activity.Test"
+    tools:context=".function_activity.Test_mode.Test"
     android:orientation="vertical">
     <include layout="@layout/toolbar"
         android:layout_width="match_parent"
@@ -95,7 +95,7 @@
             android:layout_width="160dp"
             android:layout_height="150dp"
             android:id="@+id/imageView"
-            android:src="@drawable/true_exam"
+            android:src="@drawable/suiji_exam"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />

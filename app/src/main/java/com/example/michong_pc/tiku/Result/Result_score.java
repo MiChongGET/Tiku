@@ -1,6 +1,9 @@
 package com.example.michong_pc.tiku.Result;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -10,6 +13,8 @@ import android.widget.Toast;
 
 import com.example.michong_pc.tiku.R;
 import com.example.michong_pc.tiku.adapter.ScoreAdapter;
+import com.example.michong_pc.tiku.function_activity.Test_mode.Test;
+import com.example.michong_pc.tiku.function_activity.Test_mode.Test_chooce;
 
 public class Result_score extends AppCompatActivity{
     private ScoreAdapter scoreAdapter;
@@ -27,7 +32,11 @@ public class Result_score extends AppCompatActivity{
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                Intent intent = new Intent();
+                intent.setClass(Result_score.this,Test_chooce.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -45,6 +54,30 @@ public class Result_score extends AppCompatActivity{
                 Toast.makeText(Result_score.this,"跳转到"+num_tihao+"题",Toast.LENGTH_SHORT).show();
             }
         });
+    }
 
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("确定退出？")
+                .setIcon(android.R.drawable.ic_menu_save)
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent();
+                        intent.setClass(Result_score.this,Test_chooce.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                        finish();
+                    }
+                })
+                .setNeutralButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .show();
     }
 }
