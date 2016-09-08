@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.michong_pc.tiku.R;
@@ -19,7 +20,7 @@ import com.example.michong_pc.tiku.function_activity.Test_mode.Test_chooce;
 public class Result_score extends AppCompatActivity{
     private ScoreAdapter scoreAdapter;
     private GridView gridView;
-
+    private TextView keep_time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,11 @@ public class Result_score extends AppCompatActivity{
                 finish();
             }
         });
+        //显示考试所用时间
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
+        keep_time = (TextView) findViewById(R.id.keep_time);
+        keep_time.setText(b.getString("keep_time"));
 
         iniView();
     }
@@ -66,7 +72,7 @@ public class Result_score extends AppCompatActivity{
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent();
-                        intent.setClass(Result_score.this,Test_chooce.class);
+                        intent.setClass(Result_score.this,Test.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         finish();

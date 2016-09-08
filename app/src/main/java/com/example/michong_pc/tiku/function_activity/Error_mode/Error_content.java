@@ -1,20 +1,16 @@
-package com.example.michong_pc.tiku.function_activity;
+package com.example.michong_pc.tiku.function_activity.Error_mode;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.michong_pc.tiku.R;
 import com.example.michong_pc.tiku.ViewFlipper.MyViewFlipper;
@@ -25,9 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -35,19 +29,14 @@ import java.net.URL;
 
 import io.github.kexanie.library.MathView;
 
-public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewFlipperListener {
+public class Error_content extends AppCompatActivity implements MyViewFlipper.OnViewFlipperListener{
     private MyViewFlipper myViewFlipper;
     private int currentNumber;
     private TextView page;
     private TextView page_total;
     private int total = 11;
-    private EditText editText;
     private DrawerLayout mDrawerLayout;
-    private LinearLayout mNumberLayout;
-    private LinearLayout mDrawerContent;
-    private int mTranslationY = 0;
-    private boolean isOpened = false;
-    private boolean isClosed = false;
+
 
     private MathView mathView;
     private MathView mathView2;
@@ -60,12 +49,10 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
     private String input = "";
     private String result = "";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_zuo_ti_ban);
-        //传递第几套的数值
+        setContentView(R.layout.activity_error_content);
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
         Toolbar toolbar = (Toolbar) findViewById(R.id.id_tool_bar);
@@ -216,7 +203,7 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        ZuoTiBan.this.finish();
+                        Error_content.this.finish();
                     }
                 })
                 .setNeutralButton("取消", new DialogInterface.OnClickListener() {
@@ -227,5 +214,6 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
                 })
                 .show();
     }
+
 }
 

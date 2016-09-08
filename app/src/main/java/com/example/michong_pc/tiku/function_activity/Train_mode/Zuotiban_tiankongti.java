@@ -1,4 +1,4 @@
-package com.example.michong_pc.tiku.function_activity;
+package com.example.michong_pc.tiku.function_activity.Train_mode;
 
 import android.content.DialogInterface;
 import android.content.Intent;

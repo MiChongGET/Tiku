@@ -54,7 +54,7 @@ public class Test extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Test.this, Result_score.class));
+                startActivity(new Intent(Test.this, Suiji_test.class));
             }
         });
 

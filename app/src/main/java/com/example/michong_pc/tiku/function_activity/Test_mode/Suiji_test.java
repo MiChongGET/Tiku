@@ -2,24 +2,22 @@ package com.example.michong_pc.tiku.function_activity.Test_mode;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Chronometer;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.michong_pc.tiku.R;
 import com.example.michong_pc.tiku.Result.Result_score;
 import com.example.michong_pc.tiku.ViewFlipper.MyViewFlipper;
-import com.example.michong_pc.tiku.drawlibrary.DrawerLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,7 +32,8 @@ import java.net.URL;
 
 import io.github.kexanie.library.MathView;
 
-public class Test_chooseBan extends AppCompatActivity implements MyViewFlipper.OnViewFlipperListener {
+public class Suiji_test extends AppCompatActivity implements MyViewFlipper.OnViewFlipperListener {
+
     private MyViewFlipper myViewFlipper;
     private int currentNumber;
     private TextView page;
@@ -58,12 +57,9 @@ public class Test_chooseBan extends AppCompatActivity implements MyViewFlipper.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_testchooseban);
-        //传递第几套的数值
-        Intent intent = getIntent();
-        Bundle b = intent.getExtras();
+        setContentView(R.layout.activity_suiji_test);
         Toolbar toolbar = (Toolbar) findViewById(R.id.id_tool_bar);
-        toolbar.setTitle(b.getString("capter"));
+        toolbar.setTitle("随机考试");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -74,7 +70,7 @@ public class Test_chooseBan extends AppCompatActivity implements MyViewFlipper.O
                 Bundle bundle = new Bundle();
                 bundle.putString("keep_time","考试用时"+countTime.getText().toString());
                 intent.putExtras(bundle);
-                intent.setClass(Test_chooseBan.this, Result_score.class);
+                intent.setClass(Suiji_test.this, Result_score.class);
                 startActivity(intent);
                 finish();
             }
@@ -83,7 +79,7 @@ public class Test_chooseBan extends AppCompatActivity implements MyViewFlipper.O
 
         //考试计时
         countTime = (Chronometer) findViewById(R.id.chronometer);
-       // countTime.setFormat("考试计时：%s");
+        // countTime.setFormat("考试计时：%s");
         int hour = (int) ((SystemClock.elapsedRealtime() - countTime.getBase()) / 1000 / 60);
         countTime.setFormat("0"+String.valueOf(hour)+":%s");
         countTime.start();
@@ -225,7 +221,7 @@ public class Test_chooseBan extends AppCompatActivity implements MyViewFlipper.O
                         Bundle bundle = new Bundle();
                         bundle.putString("keep_time","考试用时"+countTime.getText().toString());
                         intent.putExtras(bundle);
-                        intent.setClass(Test_chooseBan.this,Result_score.class);
+                        intent.setClass(Suiji_test.this,Result_score.class);
                         //杀掉其他运行的activity
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
@@ -241,4 +237,3 @@ public class Test_chooseBan extends AppCompatActivity implements MyViewFlipper.O
                 .show();
     }
 }
-

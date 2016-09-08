@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:id="@+id/train"
     android:orientation="vertical"
-    tools:context="com.example.michong_pc.tiku.function_activity.train">
+    tools:context=".function_activity.Train_mode.train">
 
 <include layout="@layout/toolbar"
     android:layout_width="match_parent"

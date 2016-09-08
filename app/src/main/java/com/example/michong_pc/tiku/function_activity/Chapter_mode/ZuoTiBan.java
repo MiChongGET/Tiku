@@ -1,23 +1,18 @@
-package com.example.michong_pc.tiku.function_activity.Test_mode;
+package com.example.michong_pc.tiku.function_activity.Chapter_mode;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Chronometer;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.michong_pc.tiku.R;
-import com.example.michong_pc.tiku.Result.Result_score;
 import com.example.michong_pc.tiku.ViewFlipper.MyViewFlipper;
 import com.example.michong_pc.tiku.drawlibrary.DrawerLayout;
 
@@ -34,13 +29,13 @@ import java.net.URL;
 
 import io.github.kexanie.library.MathView;
 
-public class Test_chooseBan extends AppCompatActivity implements MyViewFlipper.OnViewFlipperListener {
+public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewFlipperListener {
     private MyViewFlipper myViewFlipper;
     private int currentNumber;
     private TextView page;
     private TextView page_total;
     private int total = 11;
-    private EditText editText;
+    private DrawerLayout mDrawerLayout;
 
 
     private MathView mathView;
@@ -53,12 +48,12 @@ public class Test_chooseBan extends AppCompatActivity implements MyViewFlipper.O
     private String answer2;
     private String input = "";
     private String result = "";
-    private Chronometer countTime;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_testchooseban);
+        setContentView(R.layout.activity_zuo_ti_ban);
         //传递第几套的数值
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
@@ -69,24 +64,9 @@ public class Test_chooseBan extends AppCompatActivity implements MyViewFlipper.O
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                stop();
-                Bundle bundle = new Bundle();
-                bundle.putString("keep_time","考试用时"+countTime.getText().toString());
-                intent.putExtras(bundle);
-                intent.setClass(Test_chooseBan.this, Result_score.class);
-                startActivity(intent);
-                finish();
+                onBackPressed();
             }
         });
-
-
-        //考试计时
-        countTime = (Chronometer) findViewById(R.id.chronometer);
-       // countTime.setFormat("考试计时：%s");
-        int hour = (int) ((SystemClock.elapsedRealtime() - countTime.getBase()) / 1000 / 60);
-        countTime.setFormat("0"+String.valueOf(hour)+":%s");
-        countTime.start();
 
 
         //题号，默认是第一题
@@ -98,14 +78,19 @@ public class Test_chooseBan extends AppCompatActivity implements MyViewFlipper.O
         page_total = (TextView) findViewById(R.id.page_total);
         page_total.setText(String.valueOf(total));
 
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.dial_drawer);
+        mDrawerLayout.setInitialState(DrawerLayout.State.Close); //set drawer initial state: open or close
+        mDrawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void drawerOpened() {
+            }
+
+            @Override
+            public void drawerClosed() {
+            }
+        });
     }
-
-    public void stop(){
-        countTime.stop();
-        Log.i("考试时间:",countTime.getText().toString());
-
-    }
-
 
     private View createView(final int currentNumber) {
 
@@ -220,16 +205,7 @@ public class Test_chooseBan extends AppCompatActivity implements MyViewFlipper.O
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent();
-                        stop();
-                        Bundle bundle = new Bundle();
-                        bundle.putString("keep_time","考试用时"+countTime.getText().toString());
-                        intent.putExtras(bundle);
-                        intent.setClass(Test_chooseBan.this,Result_score.class);
-                        //杀掉其他运行的activity
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
-                        finish();
+                        ZuoTiBan.this.finish();
                     }
                 })
                 .setNeutralButton("取消", new DialogInterface.OnClickListener() {

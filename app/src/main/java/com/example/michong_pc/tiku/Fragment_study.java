@@ -14,9 +14,11 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.example.michong_pc.tiku.adapter.GridViewAdapter;
+import com.example.michong_pc.tiku.function_activity.Error_mode.Error_Chapter;
+import com.example.michong_pc.tiku.function_activity.Formulary.Formulay_chapter;
 import com.example.michong_pc.tiku.function_activity.Test_mode.Test;
-import com.example.michong_pc.tiku.function_activity.train;
-import com.example.michong_pc.tiku.function_activity.zhangjiexunlian;
+import com.example.michong_pc.tiku.function_activity.Train_mode.train;
+import com.example.michong_pc.tiku.function_activity.Chapter_mode.zhangjiexunlian;
 
 /**
  * Created by MiChong-pc on 2016/5/21.
@@ -105,10 +107,12 @@ public class Fragment_study extends android.support.v4.app.Fragment {
                         startActivity(new Intent(getActivity(),Test.class));
                         break;
                     case 3:
+                        startActivity(new Intent(getActivity(),Error_Chapter.class));
                         break;
                     case 4:
                         break;
                     case 5:
+                        startActivity(new Intent(getActivity(),Formulay_chapter.class));
                         break;
                 }
             }
