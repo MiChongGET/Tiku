@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.michong_pc.tiku.Login.Login">
+
+
+
+
+    <Button
+        android:layout_width="240dp"
+        android:layout_height="45dp"
+        android:text="登录"
+        android:textSize="20dp"
+        android:textColor="#ffff"
+        android:id="@+id/login"
+        android:background="#0789CC"
+        android:layout_marginTop="54dp"
+        android:layout_below="@+id/relativeLayout"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="70dp"
+        android:id="@+id/imageView12"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="59dp"
+        android:background="@drawable/login"/>
+
+
+
+
+
+    <RelativeLayout
+        android:id="@+id/accountRel"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="58dp"
+        android:background="@drawable/bg_edittex"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:layout_below="@+id/imageView12"
+        android:layout_centerHorizontal="true">
+
+        <ImageView
+            android:id="@+id/account"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:padding="8dp"
+            android:text="学号"
+            android:textColor="#000"
+            android:textSize="17sp"
+            android:background="@drawable/name"
+            android:layout_marginLeft="7dp"
+            android:layout_marginStart="7dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:id="@+id/accountEdittext"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:hint="请输入学号"
+            android:textColorHint="#D6D6D6"
+            android:textSize="15sp"
+            android:layout_toRightOf="@+id/account"
+            android:paddingLeft="10dp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_edittex"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/accountRel"
+        android:layout_alignStart="@+id/accountRel">
+
+        <ImageView
+            android:id="@+id/imageView10"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:padding="8dp"
+            android:text="学号"
+            android:textColor="#000"
+            android:textSize="17sp"
+            android:background="@drawable/pwd"
+            android:layout_marginLeft="7dp"
+            android:layout_marginStart="7dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:hint="请输入密码"
+            android:textColorHint="#D6D6D6"
+            android:textSize="15sp"
+            android:layout_toRightOf="@+id/imageView10"
+            android:paddingLeft="10dp" />
+    </RelativeLayout>
+</RelativeLayout>
