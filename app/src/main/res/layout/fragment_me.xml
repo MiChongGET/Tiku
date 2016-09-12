@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:weightSum="1">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:elevation="4dp"
@@ -16,11 +17,253 @@
             android:textSize="20dp"
             android:gravity="center_horizontal"
             android:textColor="#ffffff"/>
+        <Button
+            android:id="@+id/settings"
+            android:layout_gravity="right"
+            android:textStyle="bold"
+            android:background="@drawable/setting"
+            android:layout_marginRight="10dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"/>
     </android.support.v7.widget.Toolbar>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="3"
-        android:id="@+id/textView3" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_gravity="center_horizontal"
+        android:background="?attr/colorPrimary">
+        <com.example.michong_pc.tiku.Personal.Roundimage
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:id="@+id/heard_icon"
+            android:layout_marginLeft="29dp"
+            android:layout_marginStart="29dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/header_icon"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="学号:  1408040244"
+            android:textSize="15dp"
+            android:id="@+id/number"
+            android:textColor="#ffff"
+            android:layout_centerInParent="true"
+            android:layout_alignTop="@+id/heard_icon"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="姓名:  赵晓东"
+            android:textSize="15dp"
+            android:textColor="#ffff"
+            android:id="@+id/name"
+            android:layout_alignBottom="@+id/heard_icon"
+            android:layout_alignLeft="@+id/number"
+            android:layout_alignStart="@+id/number" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="30dp"
+            android:id="@+id/textView3"
+            android:layout_marginLeft="55dp"
+            android:layout_marginStart="55dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="30dp"
+            android:id="@+id/textView6"
+            android:layout_alignBaseline="@+id/textView3"
+            android:layout_alignBottom="@+id/textView3"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="30dp"
+            android:id="@+id/textView9"
+            android:layout_marginRight="55dp"
+            android:layout_marginEnd="55dp"
+            android:layout_alignTop="@+id/textView6"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="已完成的试题数"
+            android:id="@+id/textView10"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="错题数"
+            android:id="@+id/textView11"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="已完成考试数"
+            android:id="@+id/textView12"
+            android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#B7B7B7"></LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/border2"
+        android:id="@+id/contentPane3">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="考试记录"
+            android:textSize="18dp"
+            android:id="@+id/textView15"
+            android:layout_marginLeft="34dp"
+            android:layout_marginStart="34dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/imageView8"
+            android:background="@drawable/list_arrow"
+            android:layout_alignTop="@+id/textView15"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/border2"
+        android:id="@+id/contentPane4">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="试卷评价分"
+            android:textSize="18dp"
+            android:id="@+id/textView16"
+            android:layout_marginLeft="34dp"
+            android:layout_marginStart="34dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/imageView9"
+            android:background="@drawable/list_arrow"
+            android:layout_alignTop="@+id/textView16"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#B7B7B7"></LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/border2"
+        android:id="@+id/contentPanel">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="正确率"
+            android:textSize="18dp"
+            android:id="@+id/textView13"
+            android:layout_marginLeft="34dp"
+            android:layout_marginStart="34dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/imageView6"
+            android:background="@drawable/list_arrow"
+            android:layout_alignTop="@+id/textView13"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/border2"
+        android:id="@+id/contentPane2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="标记题目"
+            android:textSize="18dp"
+            android:id="@+id/textView14"
+            android:layout_marginLeft="34dp"
+            android:layout_marginStart="34dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/imageView7"
+            android:background="@drawable/list_arrow"
+            android:layout_alignTop="@+id/textView14"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+
 </LinearLayout>

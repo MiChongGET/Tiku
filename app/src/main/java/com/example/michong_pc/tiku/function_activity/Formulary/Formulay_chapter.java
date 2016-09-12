@@ -37,12 +37,12 @@ public class Formulay_chapter extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent intent = new Intent(Formulay_chapter.this,Error_content.class);
-//                Bundle bundle = new Bundle();
-//                //设置标题为第几章
-//                bundle.putString("capter","第"+number[position]+"章");
-//                intent.putExtras(bundle);
-//                startActivity(intent);
+                Intent intent = new Intent(Formulay_chapter.this,Formulay_content.class);
+                Bundle bundle = new Bundle();
+                //设置标题为第几章
+                bundle.putString("capter","第"+number[position]+"章");
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
     }

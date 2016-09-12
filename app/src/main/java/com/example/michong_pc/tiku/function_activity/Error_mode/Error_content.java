@@ -126,8 +126,8 @@ public class Error_content extends AppCompatActivity implements MyViewFlipper.On
                     JSONObject json = jsonArray.getJSONObject(0);
                     question = json.getString("question");
                     answer2 = json.getString("answer");
-                    Log.i("第一题的题目：", question);
-                    Log.i("第一题的答案", answer2);
+//                    Log.i("第一题的题目：", question);
+//                    Log.i("第一题的答案", answer2);
 
                     //在题板上添加问题
                     mathView2 = (MathView) findViewById(R.id.question_ban);
