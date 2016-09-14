@@ -42,6 +42,7 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity android:name=".function_activity.Formulary.Formulay_chapter" />
         <activity android:name=".function_activity.Formulary.Formulay_content" />
+        <activity android:name=".function_activity.choose_question"/>
         <activity android:name=".Personal.Personal_center" />
         <activity android:name=".Login.Login">
             <intent-filter>

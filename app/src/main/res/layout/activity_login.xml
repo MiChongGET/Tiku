@@ -6,8 +6,6 @@
     tools:context="com.example.michong_pc.tiku.Login.Login">
 
 
-
-
     <Button
         android:layout_width="240dp"
         android:layout_height="45dp"
@@ -15,7 +13,7 @@
         android:textSize="20dp"
         android:textColor="#ffff"
         android:id="@+id/login"
-        android:background="#0789CC"
+        android:background="@drawable/login_button"
         android:layout_marginTop="54dp"
         android:layout_below="@+id/relativeLayout"
         android:layout_centerHorizontal="true" />

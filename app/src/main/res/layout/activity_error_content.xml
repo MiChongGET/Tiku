@@ -100,10 +100,10 @@
                 android:id="@+id/prev"
                 android:onClick="prev"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="104dp"
-                android:layout_marginStart="104dp" />
+                android:layout_alignRight="@+id/button"
+                android:layout_alignEnd="@+id/button"
+                android:layout_marginRight="43dp"
+                android:layout_marginEnd="43dp" />
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -111,8 +111,20 @@
                 android:text="下一题"
                 android:onClick="next"
                 android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/prev"
-                android:layout_toEndOf="@+id/prev" />
+                android:layout_alignLeft="@+id/button"
+                android:layout_alignStart="@+id/button"
+                android:layout_marginLeft="42dp"
+                android:layout_marginStart="42dp" />
+            <Button
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:text="会"
+                android:id="@+id/button"
+                android:textSize="40dp"
+                android:textColor="#ffff"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/button_cando"/>
         </RelativeLayout>
     </LinearLayout>
 

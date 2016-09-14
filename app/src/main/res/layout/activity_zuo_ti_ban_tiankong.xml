@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:id="@+id/main_view">
-        <include layout="@layout/toolbar"
+        <include layout="@layout/toolbar2"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:id="@+id/toorbar2"/>
@@ -120,20 +120,24 @@
                 android:layout_height="wrap_content"
                 android:text="上一题"
                 android:id="@+id/prev"
+                android:onClick="prev"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:onClick="prev"/>
+                android:layout_marginLeft="50dp"
+                android:layout_marginStart="50dp" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/next"
                 android:text="下一题"
+                android:onClick="next"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:onClick="next"/>
+                android:layout_toRightOf="@+id/prev"
+                android:layout_toEndOf="@+id/prev"
+                android:layout_marginLeft="61dp"
+                android:layout_marginStart="61dp" />
         </RelativeLayout>
     </LinearLayout>
 

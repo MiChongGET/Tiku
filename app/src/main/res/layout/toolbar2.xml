@@ -7,12 +7,24 @@
     <android.support.v7.widget.Toolbar
         android:layout_height="?attr/actionBarSize"
         android:layout_width="match_parent"
-        android:id="@+id/id_tool_bar"
+        android:id="@+id/id_tool_bar2"
         android:background="?attr/colorPrimary"
         app:navigationIcon="@drawable/back_icon"
         app:titleTextColor="#ffff"
         >
 
+
+        <Button
+            android:layout_marginTop="10dp"
+            android:text="选择题目"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_gravity="right|top"
+            android:id="@+id/choose_question"
+            android:background="@drawable/choose_question"/>
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:id="@+id/toorbar2"/>
     </android.support.v7.widget.Toolbar>
 
 </FrameLayout>
