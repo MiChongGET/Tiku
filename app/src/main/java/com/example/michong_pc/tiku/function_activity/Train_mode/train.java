@@ -7,11 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.michong_pc.tiku.R;
+import com.example.michong_pc.tiku.function_activity.Chapter_mode.ZuoTiBan;
+import com.example.michong_pc.tiku.function_activity.choose_question;
 
 public class train extends AppCompatActivity {
     private TextView textView1;
@@ -83,12 +86,6 @@ public class train extends AppCompatActivity {
                 Toast.makeText(train.this,"综合题",Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main2,menu);
-        return true;
     }
 
 }

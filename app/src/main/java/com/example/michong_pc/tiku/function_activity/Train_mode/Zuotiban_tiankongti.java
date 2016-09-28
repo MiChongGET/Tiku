@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.example.michong_pc.tiku.R;
 import com.example.michong_pc.tiku.ViewFlipper.MyViewFlipper;
 import com.example.michong_pc.tiku.drawlibrary.DrawerLayout;
+import com.example.michong_pc.tiku.function_activity.choose_question;
 
 public class Zuotiban_tiankongti extends AppCompatActivity implements MyViewFlipper.OnViewFlipperListener {
     private MyViewFlipper myViewFlipper;
@@ -31,12 +33,12 @@ public class Zuotiban_tiankongti extends AppCompatActivity implements MyViewFlip
     private int mTranslationY = 0;
     private boolean isOpened = false;
     private boolean isClosed = false;
-
+    private Button choose;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_zuo_ti_ban_tiankong);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.id_tool_bar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.id_tool_bar2);
         Intent intent = getIntent();
         Bundle b= intent.getExtras();
         toolbar.setTitle(b.getString("capter"));
@@ -48,6 +50,14 @@ public class Zuotiban_tiankongti extends AppCompatActivity implements MyViewFlip
                 onBackPressed();
             }
         });
+        choose = (Button) findViewById(R.id.choose_question);
+        choose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Zuotiban_tiankongti.this, choose_question.class));
+            }
+        });
+
         currentNumber =1;
         myViewFlipper = (MyViewFlipper) findViewById(R.id.body_flipper);
         myViewFlipper.setOnViewFlipperListener(this);

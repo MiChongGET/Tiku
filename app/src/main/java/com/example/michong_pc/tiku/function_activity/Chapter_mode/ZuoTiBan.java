@@ -9,12 +9,14 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.michong_pc.tiku.R;
 import com.example.michong_pc.tiku.ViewFlipper.MyViewFlipper;
 import com.example.michong_pc.tiku.drawlibrary.DrawerLayout;
+import com.example.michong_pc.tiku.function_activity.choose_question;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,6 +50,7 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
     private String answer2;
     private String input = "";
     private String result = "";
+    private Button choose;
 
 
     @Override
@@ -57,7 +60,7 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
         //传递第几套的数值
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
-        Toolbar toolbar = (Toolbar) findViewById(R.id.id_tool_bar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.id_tool_bar2);
         toolbar.setTitle(b.getString("capter"));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -65,6 +68,14 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
             @Override
             public void onClick(View v) {
                 onBackPressed();
+            }
+        });
+
+        choose = (Button) findViewById(R.id.choose_question);
+        choose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ZuoTiBan.this, choose_question.class));
             }
         });
 
@@ -172,6 +183,26 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
     //获取下一个页面
     @Override
     public View getNextView() {
+        //判断题目是否做完
+        if(currentNumber+1==12  ){
+            new AlertDialog.Builder(this)
+                    .setTitle("所有题目已经做完，是否退出？")
+                    .setIcon(android.R.drawable.ic_menu_save)
+                    .setPositiveButton("是", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ZuoTiBan.this.finish();
+                        }
+                    })
+                    .setNeutralButton("否", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                    .show();
+        }
+
         currentNumber = currentNumber == total ? 1 : currentNumber + 1;
         return createView(currentNumber);
     }

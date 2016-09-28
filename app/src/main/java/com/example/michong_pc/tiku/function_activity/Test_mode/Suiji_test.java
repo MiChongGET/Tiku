@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.ScrollView;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import com.example.michong_pc.tiku.R;
 import com.example.michong_pc.tiku.Result.Result_score;
 import com.example.michong_pc.tiku.ViewFlipper.MyViewFlipper;
+import com.example.michong_pc.tiku.function_activity.choose_question;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,32 +52,34 @@ public class Suiji_test extends AppCompatActivity implements MyViewFlipper.OnVie
 
     private String question;
     private String answer2;
-    private String input = "";
-    private String result = "";
+    private String input="";
+    private String result="";
     private Chronometer countTime;
+    private Button choose;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_suiji_test);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.id_tool_bar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.id_tool_bar2);
         toolbar.setTitle("随机考试");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                stop();
-                Bundle bundle = new Bundle();
-                bundle.putString("keep_time","考试用时"+countTime.getText().toString());
-                intent.putExtras(bundle);
-                intent.setClass(Suiji_test.this, Result_score.class);
-                startActivity(intent);
-                finish();
+                onBackPressed();
             }
         });
 
+        //题目选择
+        choose = (Button) findViewById(R.id.choose_question);
+        choose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Suiji_test.this, choose_question.class));
+            }
+        });
 
         //考试计时
         countTime = (Chronometer) findViewById(R.id.chronometer);
@@ -110,7 +114,7 @@ public class Suiji_test extends AppCompatActivity implements MyViewFlipper.OnVie
             @Override
             public void run() {
                 //JSON数据解析
-                String url_exam = "http://115.159.153.147/tk/admin.php/Library/api";
+                String url_exam = "http://www.weather.com.cn/data/sk/101010100.html";
                 try {
                     URL url = new URL(url_exam); //创建URL对象
                     //返回一个URLConnection对象，它表示到URL所引用的远程对象的连接
@@ -122,7 +126,7 @@ public class Suiji_test extends AppCompatActivity implements MyViewFlipper.OnVie
 
                     while ((input = bufferedReader.readLine()) != null) {
                         //得到整个页面的字符
-                        result += input;
+                        result+=input;
                     }
                     Log.i("返回结果", result);
                     JSONObject jsonObject = new JSONObject(result);

@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import com.example.michong_pc.tiku.ViewFlipper.MyViewFlipper;
 import com.example.michong_pc.tiku.adapter.GridViewAdapter;
 import com.example.michong_pc.tiku.function_activity.Error_mode.Error_Chapter;
 import com.example.michong_pc.tiku.function_activity.Formulary.Formulay_chapter;
@@ -44,6 +45,7 @@ public class Fragment_study extends android.support.v4.app.Fragment {
         initView();
 
         viewFlipper = (ViewFlipper) root.findViewById(R.id.pic);
+
         for (int i=0;i<images.length;i++){
             viewFlipper.addView(getImageView(images[i]));
         }
@@ -61,7 +63,7 @@ public class Fragment_study extends android.support.v4.app.Fragment {
                     }
                     case MotionEvent.ACTION_MOVE:{
                         if (event.getX()-startx>100){
-                            viewFlipper.setInAnimation(getActivity(),R.anim.push_left_in);
+                            viewFlipper.setInAnimation(getActivity(),R.anim.push_right_in);
                             viewFlipper.showPrevious();
                         }
                         if(event.getX()-startx<100){

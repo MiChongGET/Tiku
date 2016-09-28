@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -20,6 +21,7 @@ import com.example.michong_pc.tiku.R;
 import com.example.michong_pc.tiku.Result.Result_score;
 import com.example.michong_pc.tiku.ViewFlipper.MyViewFlipper;
 import com.example.michong_pc.tiku.drawlibrary.DrawerLayout;
+import com.example.michong_pc.tiku.function_activity.choose_question;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -54,6 +56,7 @@ public class Test_chooseBan extends AppCompatActivity implements MyViewFlipper.O
     private String input = "";
     private String result = "";
     private Chronometer countTime;
+    private Button choose;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,25 +65,24 @@ public class Test_chooseBan extends AppCompatActivity implements MyViewFlipper.O
         //传递第几套的数值
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
-        Toolbar toolbar = (Toolbar) findViewById(R.id.id_tool_bar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.id_tool_bar2);
         toolbar.setTitle(b.getString("capter"));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                stop();
-                Bundle bundle = new Bundle();
-                bundle.putString("keep_time","考试用时"+countTime.getText().toString());
-                intent.putExtras(bundle);
-                intent.setClass(Test_chooseBan.this, Result_score.class);
-                startActivity(intent);
-                finish();
+               onBackPressed();
             }
         });
 
-
+        choose = (Button) findViewById(R.id.choose_question);
+        choose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Test_chooseBan.this, choose_question.class));
+            }
+        });
         //考试计时
         countTime = (Chronometer) findViewById(R.id.chronometer);
        // countTime.setFormat("考试计时：%s");

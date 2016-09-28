@@ -29,7 +29,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="101dp"
         android:layout_gravity="center_horizontal"
         android:background="?attr/colorPrimary">
         <com.example.michong_pc.tiku.Personal.Roundimage
@@ -50,9 +50,9 @@
             android:textSize="15dp"
             android:id="@+id/number"
             android:textColor="#ffff"
-            android:layout_centerInParent="true"
-            android:layout_alignTop="@+id/heard_icon"
-            android:layout_centerHorizontal="true" />
+            android:layout_below="@+id/name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="7dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -61,7 +61,8 @@
             android:textSize="15dp"
             android:textColor="#ffff"
             android:id="@+id/name"
-            android:layout_alignBottom="@+id/heard_icon"
+            android:layout_marginTop="21dp"
+            android:layout_alignTop="@+id/heard_icon"
             android:layout_alignLeft="@+id/number"
             android:layout_alignStart="@+id/number" />
     </RelativeLayout>
