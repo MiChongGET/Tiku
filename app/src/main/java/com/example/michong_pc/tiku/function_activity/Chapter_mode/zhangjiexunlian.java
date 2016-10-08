@@ -13,57 +13,49 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.michong_pc.tiku.JSON.HttpUtils;
 import com.example.michong_pc.tiku.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.michong_pc.tiku.JSON.JSONError.removeBOM;
+
 public class zhangjiexunlian extends AppCompatActivity {
     private ListView listView;
-    private final String[] data = {"第一章  气体","第二章  热力学第一定律","第三章  热力学第二定律","第四章  多组分系统热力学及其在溶液中的应用","第五章  相平衡","第六章  化学平衡","第七章  统计热力学","第八章  电解质溶液"};
     private String[] number={"一","二","三","四","五","六","七","八","九","十","十一","十二","十三","十四"};
     private String input = "";
     private String result = "";
     private List<String> capter;
+    private String url = "http://tk.e8net.cn/ApiCatalog/index";
+    //处理子线程的数据
+    private Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
 
+            //Log.i("-----",msg.what+"");
 
-
-   Handler handler=new Handler(){
-       @Override
-       public void handleMessage(Message msg) {
-
-           Log.i("-----",msg.what+"");
-
-           listView.setAdapter(new ArrayAdapter<String>(zhangjiexunlian.this,R.layout.list_item,capter));
-       }
-   };
-
-
-
-
-
-    //处理json解析异常
-    public static final String removeBOM(String data) {
-        if (TextUtils.isEmpty(data)) {
-            return data;
+            listView.setAdapter(new ArrayAdapter<String>(zhangjiexunlian.this,R.layout.list_item,capter));
         }
+    };
 
-        if (data.startsWith("\ufeff")) {
-            return data.substring(1);
-        } else {
-            return data;
-        }
-    }
+
+//    //处理json解析异常
+//    public static final String removeBOM(String data) {
+//        if (TextUtils.isEmpty(data)) {
+//            return data;
+//        }
+//
+//        if (data.startsWith("\ufeff")) {
+//            return data.substring(1);
+//        } else {
+//            return data;
+//        }
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,20 +77,9 @@ public class zhangjiexunlian extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    URL url= new URL("http://tk.e8net.cn/ApiCatalog/index");
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    conn.setDoInput(true);
-                    conn.setRequestMethod("GET");
-                    InputStreamReader isr = new InputStreamReader(conn.getInputStream());
-                    BufferedReader br = new BufferedReader(isr);
 
-                    while((input = br.readLine())!=null){
-                        result += input;
-                    }
-                    Log.i("测试",result);
-
+                     result = HttpUtils.get(url);
                     String NewResult  = removeBOM(result);
-
                     JSONObject jsonObject = new JSONObject(NewResult);
                     String rs = jsonObject.getString("msg");
                     Log.i("结果",rs);
@@ -115,11 +96,7 @@ public class zhangjiexunlian extends AppCompatActivity {
                     }
                     handler.sendEmptyMessage(0);
 
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
+                }catch (JSONException e) {
                     e.printStackTrace();
                     Log.i("出错","error");
                 }

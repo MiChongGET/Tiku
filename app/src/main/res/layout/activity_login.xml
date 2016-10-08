@@ -9,7 +9,7 @@
     <Button
         android:layout_width="240dp"
         android:layout_height="45dp"
-        android:text="登录"
+        android:text="登  录"
         android:textSize="20dp"
         android:textColor="#ffff"
         android:id="@+id/login"
@@ -17,18 +17,6 @@
         android:layout_marginTop="43dp"
         android:layout_below="@+id/relativeLayout"
         android:layout_centerHorizontal="true" />
-
-    <ImageView
-        android:layout_width="120dp"
-        android:layout_height="70dp"
-        android:id="@+id/imageView12"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="59dp"
-        android:background="@drawable/login"/>
-
-
-
 
 
     <RelativeLayout
@@ -51,11 +39,11 @@
             android:textColor="#000"
             android:textSize="17sp"
             android:background="@drawable/name"
-            android:layout_marginLeft="7dp"
-            android:layout_marginStart="7dp"
+            android:layout_marginLeft="13dp"
+            android:layout_marginStart="13dp"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"/>
 
         <EditText
             android:id="@+id/accountEdit"
@@ -66,13 +54,20 @@
             android:textColorHint="#D6D6D6"
             android:textSize="15sp"
             android:paddingLeft="10dp"
+            android:inputType="textPersonName"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/account"
-            android:layout_toEndOf="@+id/account"
-            android:layout_marginLeft="7dp"
-            android:layout_marginStart="7dp"
-            android:inputType="textPersonName"/>
+            android:layout_toEndOf="@+id/account"/>
     </RelativeLayout>
+
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="70dp"
+        android:id="@+id/imageView12"
+        android:layout_marginTop="61dp"
+        android:background="@drawable/login"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -95,11 +90,11 @@
             android:textColor="#000"
             android:textSize="17sp"
             android:background="@drawable/pwd"
-            android:layout_marginLeft="7dp"
-            android:layout_marginStart="7dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"/>
 
         <EditText
             android:id="@+id/pwdEdit"
@@ -113,8 +108,6 @@
             android:inputType="textPassword"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/imageView10"
-            android:layout_toEndOf="@+id/imageView10"
-            android:layout_marginLeft="7dp"
-            android:layout_marginStart="7dp"/>
+            android:layout_toEndOf="@+id/imageView10"/>
     </RelativeLayout>
 </RelativeLayout>

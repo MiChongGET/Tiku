@@ -199,7 +199,7 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
                         public void onClick(DialogInterface dialog, int which) {
 
                         }
-                    })
+                    }).setCancelable(false)
                     .show();
         }
 

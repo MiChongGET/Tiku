@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.michong_pc.tiku.Activity_home;
+import com.example.michong_pc.tiku.JSON.HttpUtils;
 import com.example.michong_pc.tiku.R;
 
 import java.io.BufferedReader;
@@ -46,6 +47,10 @@ public class Login extends AppCompatActivity  {
                 case 1:
                     Toast.makeText(Login.this,"账号或密码错误,请重新输入！！！",Toast.LENGTH_LONG).show();
                     break;
+                case 2:
+                    Toast.makeText(Login.this,"未注册，无法使用",Toast.LENGTH_LONG).show();
+                    break;
+
             }
 
         }
@@ -66,7 +71,9 @@ public class Login extends AppCompatActivity  {
                 xuehao = accountedit.getText().toString();
                 pwd = pwdedit.getText().toString();
                 //Log.i("学号和密码",xuehao+"  "+pwd);
-                url ="http://115.159.153.147/jw.php?xuehao="+xuehao+"&password="+pwd;
+                url ="http://tk.e8net.cn/ApiLogin/login?xuehao="+xuehao+"&password="+pwd;
+
+
                 Thread t = new Thread(new Data());
                 t.start();
                 //Log.i("测试",result);
@@ -78,24 +85,8 @@ public class Login extends AppCompatActivity  {
 class Data implements  Runnable{
     @Override
     public void run() {
-        try {
-            String result="";
-            System.out.println(url);
-            URL url2 = new URL(url);
-            HttpURLConnection conn = (HttpURLConnection) url2.openConnection();
-            conn.setDoInput(true);
-            conn.setRequestMethod("GET");
-            InputStreamReader isr = new InputStreamReader(conn.getInputStream());
-            BufferedReader bufferedReader = new BufferedReader(isr);
+           String result= HttpUtils.get(url);
 
-            while ((input = bufferedReader.readLine()) != null) {
-                //得到整个页面的字符
-                result += input;
-            }
-            Log.i("登录","true");
-
-            bufferedReader.close();
-            isr.close();
 
             //获取message的标识
             Message message  = new Message();
@@ -106,18 +97,10 @@ class Data implements  Runnable{
             else if (result.equals("false")){
                 message.arg1=1;
             }
-
+            else {
+                message.arg1=2;
+            }
             handler.sendMessage(message);
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
     }
   }
 }

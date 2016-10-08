@@ -167,9 +167,11 @@
             android:layout_height="20dp"
             android:id="@+id/imageView8"
             android:background="@drawable/list_arrow"
-            android:layout_alignTop="@+id/textView15"
+            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="30dp"
+            android:layout_marginEnd="30dp"/>
     </RelativeLayout>
 
 
@@ -197,9 +199,11 @@
             android:layout_height="20dp"
             android:id="@+id/imageView9"
             android:background="@drawable/list_arrow"
+            android:layout_marginRight="30dp"
+            android:layout_marginEnd="30dp"
             android:layout_alignTop="@+id/textView16"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"/>
     </RelativeLayout>
 
     <LinearLayout
@@ -233,7 +237,9 @@
             android:background="@drawable/list_arrow"
             android:layout_alignTop="@+id/textView13"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="30dp"
+            android:layout_marginEnd="30dp"/>
     </RelativeLayout>
 
 
@@ -261,9 +267,11 @@
             android:layout_height="20dp"
             android:id="@+id/imageView7"
             android:background="@drawable/list_arrow"
+            android:layout_marginRight="30dp"
+            android:layout_marginEnd="30dp"
             android:layout_alignTop="@+id/textView14"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"/>
     </RelativeLayout>
 
 

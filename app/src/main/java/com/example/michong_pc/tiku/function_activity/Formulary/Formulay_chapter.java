@@ -2,20 +2,46 @@ package com.example.michong_pc.tiku.function_activity.Formulary;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.michong_pc.tiku.JSON.HttpUtils;
 import com.example.michong_pc.tiku.R;
+import com.example.michong_pc.tiku.function_activity.Error_mode.Error_Chapter;
 import com.example.michong_pc.tiku.function_activity.Error_mode.Error_content;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.example.michong_pc.tiku.JSON.JSONError.removeBOM;
 
 public class Formulay_chapter extends AppCompatActivity {
     private ListView listView;
-    private final String[] data = {"第一章  气体","第二章  热力学第一定律","第三章  热力学第二定律","第四章  多组分系统热力学及其在溶液中的应用","第五章  相平衡","第六章  化学平衡","第七章  统计热力学","第八章  电解质溶液"};
-    private String[] number={"一","二","三","四","五","六","七","八"};
+    private String[] number={"一","二","三","四","五","六","七","八","九","十","十一","十二","十三","十四"};
+    private List<String> capter;
+    private String url = "http://tk.e8net.cn/ApiCatalog/index";
+    //处理子线程的数据
+    private Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+
+            //Log.i("-----",msg.what+"");
+
+            listView.setAdapter(new ArrayAdapter<String>(Formulay_chapter.this,R.layout.list_item,capter));
+        }
+    };
+    private String result="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +58,38 @@ public class Formulay_chapter extends AppCompatActivity {
             }
         });
 
+        capter = new ArrayList<String>();
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+
+                    result = HttpUtils.get(url);
+                    String NewResult  = removeBOM(result);
+                    JSONObject jsonObject = new JSONObject(NewResult);
+                    String rs = jsonObject.getString("msg");
+                    Log.i("结果",rs);
+
+                    JSONArray jsonArray = jsonObject.getJSONArray("value");
+                    //获取章节数
+                    int number = jsonArray.length();
+                    Log.i("章节数",number+"");
+                    //JSONObject  jo = jsonArray.getJSONObject(1);
+                    for(int i =0;i<number;i++){
+                        JSONObject  jo = jsonArray.getJSONObject(i);
+                        Log.i("第"+i+"条",jo.getString("name"));
+                        capter.add(jo.getString("name"));
+                    }
+                    handler.sendEmptyMessage(0);
+
+                }catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.i("出错","error");
+                }
+            }
+        }.start();
+
         listView  = (ListView) findViewById(R.id.zhangjielianxi_listView);
-        listView.setAdapter(new ArrayAdapter<String>(Formulay_chapter.this,R.layout.list_item,data));
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
