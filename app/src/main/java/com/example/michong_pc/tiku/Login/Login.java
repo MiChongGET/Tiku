@@ -34,6 +34,7 @@ public class Login extends AppCompatActivity  {
     private String result = "13223";
     private String  url = null;
     private String trues = "ture";
+
     private Handler handler = new Handler(){
         public void handleMessage(Message msg){
             super.handleMessage(msg);
@@ -64,11 +65,11 @@ public class Login extends AppCompatActivity  {
             public void onClick(View v) {
                 xuehao = accountedit.getText().toString();
                 pwd = pwdedit.getText().toString();
-                Log.i("学号和密码",xuehao+"  "+pwd);
+                //Log.i("学号和密码",xuehao+"  "+pwd);
                 url ="http://115.159.153.147/jw.php?xuehao="+xuehao+"&password="+pwd;
                 Thread t = new Thread(new Data());
                 t.start();
-                Log.i("测试",result);
+                //Log.i("测试",result);
             }
         });
     }

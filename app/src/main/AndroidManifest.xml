@@ -13,6 +13,11 @@
         android:theme="@style/AppTheme">
         <activity android:name=".function_activity.Chapter_mode.zhangjiexunlian" />
         <activity android:name=".Activity_home">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
         <activity android:name=".function_activity.Train_mode.train" />
@@ -44,13 +49,8 @@
         <activity android:name=".function_activity.Formulary.Formulay_content" />
         <activity android:name=".function_activity.choose_question"/>
         <activity android:name=".Personal.Personal_center" />
-        <activity android:name=".Login.Login">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".Login.Login"/>
     </application>
 
 </manifest>
