@@ -58,8 +58,7 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
             //在题板上添加问题
             mathView2 = (MathView) findViewById(R.id.question_ban);
             //这样写可以解决webview的异常,主要是多个webview不在同一个线程
-            mathView2.setText(question_content[currentNumber+1]);
-
+            mathView2.setText(question_content[currentNumber-1]);
             page_total.setText(String.valueOf(question_num));
         }
     };
@@ -153,12 +152,12 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
                         JSONObject  jo = jsonArray.getJSONObject(i);
                         Log.i("第"+i+"个题目",jo.getString("content"));
                         //mList.add(jo.getString("formula"));
-                        question_content[i] = jo.getString("content");
+                        question_content[i] = String.valueOf(i+1)+"."+jo.getString("content");
                     }
 
 
                     mHandler.sendEmptyMessage(0);
-                    System.out.println("下一个页面"+currentNumber);
+                    System.out.println("此页面"+currentNumber);
 
 
 //                    //在答案板上添加答案
@@ -189,7 +188,7 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
     @Override
     public View getNextView() {
         //判断题目是否做完
-        if(currentNumber+1==question_num ){
+        if(currentNumber==question_num ){
             new AlertDialog.Builder(this)
                     .setTitle("所有题目已经做完，是否退出？")
                     .setIcon(android.R.drawable.ic_menu_save)
