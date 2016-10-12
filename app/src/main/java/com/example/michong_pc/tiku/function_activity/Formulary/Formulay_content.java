@@ -7,10 +7,8 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebSettings;
-import android.widget.ListView;
 import android.widget.ScrollView;
 
 import com.example.michong_pc.tiku.JSON.HttpUtils;
@@ -19,8 +17,6 @@ import com.example.michong_pc.tiku.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.List;
 
 import io.github.kexanie.library.MathView;
 

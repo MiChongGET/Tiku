@@ -11,11 +11,48 @@
     drawer:DrawerLayout_ID="@+id/drawer2"
     android:background="#ffffff">
 
+    <RelativeLayout
+        android:id="@+id/drawer2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/drawerHandle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@string/app_name"
+            android:text="查看答案"
+            android:visibility="visible"/>
+
+        <LinearLayout
+            android:id="@+id/drawerContent"
+            android:layout_width="fill_parent"
+            android:layout_height="300dp"
+            android:layout_below="@+id/drawerHandle"
+            android:background="#D37126"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <io.github.kexanie.library.MathView
+                android:id="@+id/answer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+            </io.github.kexanie.library.MathView>
+        </LinearLayout>
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:id="@+id/main_view">
+        android:id="@+id/main_view"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
         <include layout="@layout/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
@@ -64,7 +101,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="11"
                 android:id="@+id/page_total"
                 android:layout_alignBaseline="@+id/textView4"
                 android:layout_alignBottom="@+id/textView4"
@@ -127,39 +163,5 @@
                 android:background="@drawable/button_cando"/>
         </RelativeLayout>
     </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/drawer2"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
-
-        <Button
-            android:id="@+id/drawerHandle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:contentDescription="@string/app_name"
-            android:text="查看答案"
-            android:visibility="visible"/>
-
-        <LinearLayout
-            android:id="@+id/drawerContent"
-            android:layout_width="fill_parent"
-            android:layout_height="300dp"
-            android:layout_below="@+id/drawerHandle"
-            android:background="#D37126"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <io.github.kexanie.library.MathView
-                android:id="@+id/answer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                >
-
-            </io.github.kexanie.library.MathView>
-        </LinearLayout>
-    </RelativeLayout>
 
 </com.example.michong_pc.tiku.drawlibrary.DrawerLayout>

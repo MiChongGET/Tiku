@@ -3,6 +3,8 @@ package com.example.michong_pc.tiku.function_activity.Chapter_mode;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,6 +15,7 @@ import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.example.michong_pc.tiku.JSON.HttpUtils;
 import com.example.michong_pc.tiku.R;
 import com.example.michong_pc.tiku.ViewFlipper.MyViewFlipper;
 import com.example.michong_pc.tiku.drawlibrary.DrawerLayout;
@@ -22,18 +25,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import io.github.kexanie.library.MathView;
+
+import static com.example.michong_pc.tiku.JSON.JSONError.removeBOM;
 
 public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewFlipperListener {
     private MyViewFlipper myViewFlipper;
     private int currentNumber;
+    private int question_num=0;
     private TextView page;
     private TextView page_total;
     private int total = 11;
@@ -48,12 +47,24 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
 
     private String question;
     private String answer2;
-    private String input = "";
     private String result = "";
     private Button choose;
     private String ID;
     private String chapter_url;
+    private Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            //在题板上添加问题
+            mathView2 = (MathView) findViewById(R.id.question_ban);
+            //这样写可以解决webview的异常,主要是多个webview不在同一个线程
+            mathView2.setText(question_content[currentNumber+1]);
 
+            page_total.setText(String.valueOf(question_num));
+        }
+    };
+
+    private String[] question_content;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +74,9 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
         ID = b.getString("id");
+        chapter_url = "http://tk.e8net.cn/ApiLibrary/getCatalogLibrary/id/"+ID;
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.id_tool_bar2);
         toolbar.setTitle(b.getString("capter"));
         setSupportActionBar(toolbar);
@@ -85,6 +99,7 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
 
         //题号，默认是第一题
         currentNumber = 1;
+
         myViewFlipper = (MyViewFlipper) findViewById(R.id.body_flipper);
         myViewFlipper.setOnViewFlipperListener(this);
         myViewFlipper.addView(createView(currentNumber));
@@ -106,7 +121,7 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
         });
     }
 
-    public View createView( int currentNumber) {
+    public View createView(final int currentNumber) {
 
         //创建一个线程，里面包含了JSON数据解析
         new Thread() {
@@ -116,42 +131,44 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
 
                 try {
 
-                    Log.i("返回结果", result);
-                    JSONObject jsonObject = new JSONObject(result);
-                    String error_code = jsonObject.getString("error_code");
+                    result = HttpUtils.get(chapter_url);
+                    Log.i("测试",result);
+                    String NewResult  =removeBOM(result);
+                    Log.i("返回结果", NewResult);
+                    JSONObject jsonObject = new JSONObject(NewResult);
+                    String error_code = jsonObject.getString("result");
                     Log.i("调试结果", error_code);
 
 
-                    JSONArray jsonArray = jsonObject.getJSONArray("result");
+                    JSONArray jsonArray = jsonObject.getJSONArray("value");
 
                     //获取题目的数目
-                    int question_number=jsonArray.length();
-                    Log.i("共",""+question_number);
+                     question_num=jsonArray.length();
+                     Log.i("题目数","共"+question_num+"个题目");
+                    question_content = new String[question_num];
 
-                    JSONObject json = jsonArray.getJSONObject(0);
-                    question = json.getString("question");
-                    answer2 = json.getString("answer");
-                    Log.i("第一题的题目：", question);
-                    Log.i("第一题的答案", answer2);
 
-                    //在题板上添加问题
-                    mathView2 = (MathView) findViewById(R.id.question_ban);
-                    //这样写可以解决webview的异常,主要是多个webview不在同一个线程
-                    mathView2.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            mathView2.setText(question);
-                        }
-                    });
 
-                    //在答案板上添加答案
-                    mathView = (MathView) findViewById(R.id.answer);
-                    mathView.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            mathView.setText(answer2);
-                        }
-                    });
+                    for(int i =0;i<question_num;i++){
+                        JSONObject  jo = jsonArray.getJSONObject(i);
+                        Log.i("第"+i+"个题目",jo.getString("content"));
+                        //mList.add(jo.getString("formula"));
+                        question_content[i] = jo.getString("content");
+                    }
+
+
+                    mHandler.sendEmptyMessage(0);
+                    System.out.println("下一个页面"+currentNumber);
+
+
+//                    //在答案板上添加答案
+//                    mathView = (MathView) findViewById(R.id.answer);
+//                    mathView.post(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            mathView.setText(answer2);
+//                        }
+//                    });
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -172,7 +189,7 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
     @Override
     public View getNextView() {
         //判断题目是否做完
-        if(currentNumber+1==12  ){
+        if(currentNumber+1==question_num ){
             new AlertDialog.Builder(this)
                     .setTitle("所有题目已经做完，是否退出？")
                     .setIcon(android.R.drawable.ic_menu_save)
@@ -191,7 +208,8 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
                     .show();
         }
 
-        currentNumber = currentNumber == total ? 1 : currentNumber + 1;
+        currentNumber = currentNumber == question_num ? 1 : currentNumber + 1;
+
         return createView(currentNumber);
     }
 
@@ -199,7 +217,7 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
     @Override
     public View getPreviousView() {
 
-        currentNumber = currentNumber == 1 ? total : currentNumber - 1;
+        currentNumber = currentNumber == 1 ? question_num : currentNumber - 1;
         return createView(currentNumber);
     }
 
@@ -207,6 +225,7 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
     public void prev(View source) {
         myViewFlipper.flingToPrevious();
         myViewFlipper.stopFlipping();
+
     }
 
     //按钮获取下一个页面

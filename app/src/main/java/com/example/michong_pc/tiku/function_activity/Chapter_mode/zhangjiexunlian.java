@@ -97,8 +97,9 @@ public class zhangjiexunlian extends AppCompatActivity {
                         JSONObject  jo = jsonArray.getJSONObject(i);
                         Log.i("第"+i+"条",jo.getString("name"));
                         capter.add(jo.getString("name"));
+                        chapter_id[i]=jo.getString("id");
+                        Log.i("ID",jo.getString("id"));
                     }
-
 
                     handler.sendEmptyMessage(0);
 
