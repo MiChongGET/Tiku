@@ -1,45 +1,51 @@
 package com.example.michong_pc.tiku.function_activity.Formulary;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Paint;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
-import android.view.LayoutInflater;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.BaseExpandableListAdapter;
-import android.widget.ExpandableListAdapter;
-import android.widget.ExpandableListView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.webkit.WebSettings;
+import android.widget.ListView;
+import android.widget.ScrollView;
 
+import com.example.michong_pc.tiku.JSON.HttpUtils;
 import com.example.michong_pc.tiku.R;
 
-import java.util.ArrayList;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
+import io.github.kexanie.library.MathView;
+
+import static com.example.michong_pc.tiku.JSON.JSONError.removeBOM;
+
 public class Formulay_content extends AppCompatActivity {
-    ExpandableListView el ;
-//    private String[] unit_chapter = new String[]{
-//            "1.1  气体分子动理论", "1.2  摩尔气体常数", "1.3  理想气体方程", "1.4  分子平均动能分布"
-//    };
-//    private String[][] content = new String[][]{
-//            {"文档编辑", "文档排版", "文档处理", "文档打印"},
-//            {"表格编辑", "表格排版", "表格处理", "表格打印"},
-//            {"收发邮件", "管理邮箱", "登录登出", "注册绑定"},
-//            {"演示编辑", "演示排版", "演示处理", "演示打印"},};
-    private ExpandableListView expandableListView;
-    private List<String> Group;
-    private List<List<String>> Child;
-    private List<String> ChildFirst;
-    private List<String> ChildSecond;
-    private List<String> ChildThird;
-    private List<List<Integer>> ChildPicture;
+
+    private String ID;
+    private String formulary_url;
+    private String result;
+    private StringBuilder sb;
+    private MathView mMathView;
+    private ScrollView scrollView;
+
+    private Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+
+                    mMathView.setText(sb.toString());
+
+            //mListView.setAdapter(new ArrayAdapter<String>(Formulay_content.this,R.layout.list_formulary,mList));
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +54,7 @@ public class Formulay_content extends AppCompatActivity {
         //传递第几套的数值
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
+        ID = b.getString("id");
         Toolbar toolbar = (Toolbar) findViewById(R.id.id_tool_bar);
         toolbar.setTitle(b.getString("capter"));
         setSupportActionBar(toolbar);
@@ -58,136 +65,67 @@ public class Formulay_content extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        formulary_url = "http://tk.e8net.cn/ApiFormula/getAllFormula/id/"+ID;
 
+//        mList = new ArrayList<String>();
+//        mListView = (ListView) findViewById(R.id.formulary_content);
 
-        Group = new ArrayList<String>();
-        Group.add("1.1  气体分子动理论");
-        Group.add("1.2  摩尔气体常数");
-        Group.add("1.3  理想气体方程");
-        ChildFirst = new ArrayList<String>();
-        ChildFirst.add("我的电脑");
-        ChildFirst.add("我的手机");
-        ChildFirst.add("我的打印机");
-
-        ChildSecond = new ArrayList<String>();
-        ChildSecond.add("大娃");
-        ChildSecond.add("二娃");
-        ChildSecond.add("三娃");
-
-        ChildThird = new ArrayList<String>();
-        ChildThird.add("小炮");
-        ChildThird.add("德玛");
-        ChildThird.add("亚索");
-
-        Child = new ArrayList<List<String>>();
-        Child.add(ChildFirst);
-        Child.add(ChildSecond);
-        Child.add(ChildThird);
-
-        expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
-        expandableListView.setAdapter(new MyExpandableListViewAdapter(Formulay_content.this));
-        //expandableListView.setGroupIndicator(null);
-    }
-
-    class MyExpandableListViewAdapter extends BaseExpandableListAdapter {
-
-        private Context context;
-
-        public MyExpandableListViewAdapter(Context context) {
-            this.context = context;
-        }
-
-        @Override
-        public int getGroupCount() {
-            return Group.size();
-        }
-
-        @Override
-        public int getChildrenCount(int groupPosition) {
-            return Child.get(groupPosition).size();
-        }
-
-        @Override
-        public Object getGroup(int groupPosition) {
-            return Group.get(groupPosition);
-        }
-
-        @Override
-        public Object getChild(int groupPosition, int childPosition) {
-            return Child.get(groupPosition).get(childPosition);
-        }
-
-        @Override
-        public long getGroupId(int groupPosition) {
-            return groupPosition;
-        }
-
-        @Override
-        public long getChildId(int groupPosition, int childPosition) {
-            return childPosition;
-        }
-
-        @Override
-        public boolean hasStableIds() {
-            return true;
-        }
-
-        @Override
-        public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-            GroupHolder groupHolder =null;
-            if(convertView==null){
-                convertView = getLayoutInflater().from(context).inflate(
-                        R.layout.groupview, null);      //把界面放到缓冲区
-                groupHolder = new GroupHolder();          //实例化我们创建的这个类
-                groupHolder.txt = (TextView) convertView.findViewById(R.id.notice_item_date);  //实例化类里的TextView
-                groupHolder.txt.setTextSize(20);
-                groupHolder.txt.getPaint().setAntiAlias(true);//抗锯齿
-                convertView.setTag(groupHolder);                                 //给view对象一个标签，告诉计算机我们已经在缓冲区里放了一个view，下回直                                                                               //接来拿就行了
-            } else {
-                groupHolder = (GroupHolder) convertView.getTag();     //然后他就直接来拿
-            }
-            groupHolder.txt.setText(Group.get(groupPosition));//最后在相应的group里设置他相应的Text
-//判断isExpanded就可以控制是按下还是关闭，同时更换图片
-//            if(isExpanded){
-//                parentImageViw.setBackgroundResource(R.drawable.arrow_down);
-//            }else{
-//                parentImageViw.setBackgroundResource(R.drawable.arrow_up);
+        scrollView = (ScrollView) findViewById(R.id.scrollView);
+        mMathView = (MathView) findViewById(R.id.formulary_ban);
+        WebSettings mWebSettings = mMathView.getSettings();
+        mWebSettings.setSupportZoom(true);
+//        mWebSettings.setDefaultFontSize(18);
+        mMathView.setInitialScale(300);
+        //解决scrollview和webview冲突
+//        mMathView.setOnTouchListener(new View.OnTouchListener() {
+//
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                // TODO Auto-generated method stub
+//                if (event.getAction() == MotionEvent.ACTION_UP)
+//                    scrollView.requestDisallowInterceptTouchEvent(false);
+//                else
+//                    scrollView.requestDisallowInterceptTouchEvent(true);
+//
+//                return false;
 //            }
 //
-           return convertView;
-        }
+//            });
 
-        @Override
-        public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-            ItemHolder itemHolder = null;
-            if (convertView == null) {
-                convertView = getLayoutInflater().from(context).inflate(
-                        R.layout.child, null);
-                itemHolder = new ItemHolder();
-                itemHolder.txt = (TextView) convertView.findViewById(R.id.group);
-                convertView.setTag(itemHolder);
-            } else {
-                itemHolder = (ItemHolder) convertView.getTag();
+
+        sb = new StringBuilder();
+        Log.i("结果","我是谁？？？");
+
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+
+                    result = HttpUtils.get(formulary_url);
+                    String NewResult  =removeBOM(result);
+                    JSONObject jsonObject = new JSONObject(NewResult);
+                    String rs = jsonObject.getString("msg");
+                    Log.i("结果",rs);
+
+                    JSONArray jsonArray = jsonObject.getJSONArray("value");
+                    //获取章节数
+                    int number = jsonArray.length();
+                    Log.i("公式数",number+"");
+                    for(int i =0;i<number;i++){
+                        JSONObject  jo = jsonArray.getJSONObject(i);
+                        Log.i("第"+i+"条公式",jo.getString("formula"));
+                        //mList.add(jo.getString("formula"));
+                       sb.append("<font size:16px>"+String.valueOf(i+1)+"."+jo.getString("formula")+"</font>"+"</p></p>");
+                       mHandler.sendEmptyMessage(0);
+                    }
+
+                    System.out.println("公式内容："+sb.toString());
+
+                }catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.i("出错","error");
+                }
             }
-            itemHolder.txt.setText(Child.get(groupPosition).get(
-                    childPosition));
-            itemHolder.txt.setTextSize(18);
-            return convertView;
-        }
-
-        @Override
-        public boolean isChildSelectable(int groupPosition, int childPosition) {
-            return false;
-        }
+        }.start();
     }
     }
-
-class GroupHolder {
-    public TextView txt;
-    public ImageView img;
-}
-
-class ItemHolder {
-    public ImageView img;
-    public TextView txt;
-}

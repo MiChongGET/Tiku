@@ -14,8 +14,6 @@ import android.widget.ListView;
 
 import com.example.michong_pc.tiku.JSON.HttpUtils;
 import com.example.michong_pc.tiku.R;
-import com.example.michong_pc.tiku.function_activity.Error_mode.Error_Chapter;
-import com.example.michong_pc.tiku.function_activity.Error_mode.Error_content;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,6 +29,9 @@ public class Formulay_chapter extends AppCompatActivity {
     private String[] number={"一","二","三","四","五","六","七","八","九","十","十一","十二","十三","十四"};
     private List<String> capter;
     private String url = "http://tk.e8net.cn/ApiCatalog/index";
+    private int number2;
+    private String[] formulary_id ;
+
     //处理子线程的数据
     private Handler handler=new Handler(){
         @Override
@@ -72,11 +73,13 @@ public class Formulay_chapter extends AppCompatActivity {
 
                     JSONArray jsonArray = jsonObject.getJSONArray("value");
                     //获取章节数
-                    int number = jsonArray.length();
-                    Log.i("章节数",number+"");
+                    number2 = jsonArray.length();
+                    formulary_id = new String[number2];
+                    Log.i("章节数",number2+"");
                     //JSONObject  jo = jsonArray.getJSONObject(1);
-                    for(int i =0;i<number;i++){
+                    for(int i =0;i<number2;i++){
                         JSONObject  jo = jsonArray.getJSONObject(i);
+                        formulary_id[i]=jo.getString("id");
                         Log.i("第"+i+"条",jo.getString("name"));
                         capter.add(jo.getString("name"));
                     }
@@ -89,14 +92,18 @@ public class Formulay_chapter extends AppCompatActivity {
             }
         }.start();
 
+
         listView  = (ListView) findViewById(R.id.zhangjielianxi_listView);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String po = formulary_id[position];
+                System.out.println("网页ID："+po);
                 Intent intent = new Intent(Formulay_chapter.this,Formulay_content.class);
                 Bundle bundle = new Bundle();
                 //设置标题为第几章
                 bundle.putString("capter","第"+number[position]+"章");
+                bundle.putString("id",po);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

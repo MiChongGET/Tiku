@@ -52,6 +52,7 @@ public class Activity_home extends AppCompatActivity {
 // Use colored navigation with circle reveal effect
         bottomNavigation.setColored(false);
         study = new Fragment_study();
+
         getSupportFragmentManager().beginTransaction().replace(R.id.main_content,study).commit();
 // Set listener
         bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {

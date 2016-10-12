@@ -51,6 +51,8 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
     private String input = "";
     private String result = "";
     private Button choose;
+    private String ID;
+    private String chapter_url;
 
 
     @Override
@@ -60,6 +62,7 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
         //传递第几套的数值
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
+        ID = b.getString("id");
         Toolbar toolbar = (Toolbar) findViewById(R.id.id_tool_bar2);
         toolbar.setTitle(b.getString("capter"));
         setSupportActionBar(toolbar);
@@ -103,27 +106,16 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
         });
     }
 
-    private View createView(final int currentNumber) {
+    public View createView( int currentNumber) {
 
         //创建一个线程，里面包含了JSON数据解析
         new Thread() {
             @Override
             public void run() {
                 //JSON数据解析
-                String url_exam = "http://115.159.153.147/tk/admin.php/Library/api";
-                try {
-                    URL url = new URL(url_exam); //创建URL对象
-                    //返回一个URLConnection对象，它表示到URL所引用的远程对象的连接
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    conn.setDoInput(true);
-                    conn.setRequestMethod("GET");
-                    InputStreamReader isr = new InputStreamReader(conn.getInputStream());
-                    BufferedReader bufferedReader = new BufferedReader(isr);
 
-                    while ((input = bufferedReader.readLine()) != null) {
-                        //得到整个页面的字符
-                        result += input;
-                    }
+                try {
+
                     Log.i("返回结果", result);
                     JSONObject jsonObject = new JSONObject(result);
                     String error_code = jsonObject.getString("error_code");
@@ -162,10 +154,6 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
                     });
 
                 } catch (JSONException e) {
-                    e.printStackTrace();
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
                     e.printStackTrace();
                 }
 
