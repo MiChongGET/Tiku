@@ -13,7 +13,7 @@
         android:textSize="20dp"
         android:textColor="#ffff"
         android:id="@+id/login"
-        android:background="@drawable/login_button"
+        android:background="@color/button_login"
         android:layout_marginTop="43dp"
         android:layout_below="@+id/relativeLayout"
         android:layout_centerHorizontal="true" />

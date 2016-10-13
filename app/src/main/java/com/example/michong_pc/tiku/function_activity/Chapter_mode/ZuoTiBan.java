@@ -60,6 +60,7 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
             //这样写可以解决webview的异常,主要是多个webview不在同一个线程
             mathView2.setText(question_content[currentNumber-1]);
             page_total.setText(String.valueOf(question_num));
+
         }
     };
 
@@ -152,7 +153,7 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
                         JSONObject  jo = jsonArray.getJSONObject(i);
                         Log.i("第"+i+"个题目",jo.getString("content"));
                         //mList.add(jo.getString("formula"));
-                        question_content[i] = String.valueOf(i+1)+"."+jo.getString("content");
+                        question_content[i] = String.valueOf(i+1)+".  "+jo.getString("content");
                     }
 
 
