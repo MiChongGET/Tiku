@@ -46,7 +46,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="学号:  1408040244"
+            android:text="null"
             android:textSize="15dp"
             android:id="@+id/number"
             android:textColor="#ffff"
@@ -57,7 +57,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="姓名:  赵晓东"
+            android:text="null"
             android:textSize="15dp"
             android:textColor="#ffff"
             android:id="@+id/name"
@@ -273,6 +273,24 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"/>
     </RelativeLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#B7B7B7"></LinearLayout>
+
+    <Button
+        android:text="退出"
+        android:textColor="#fff"
+        android:textSize="20dp"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:id="@+id/exit"
+        android:background="@drawable/button_out"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+
+        />
 
 
 </LinearLayout>

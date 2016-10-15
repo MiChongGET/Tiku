@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".function_activity.Chapter_mode.zhangjiexunlian"/>
-        <activity android:name=".Activity_home">
+        <activity android:name=".Login.GuidePage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -48,7 +48,9 @@
         <activity android:name=".function_activity.Formulary.Formulay_content"/>
         <activity android:name=".function_activity.choose_question"/>
         <activity android:name=".Personal.Personal_center"/>
-        <activity android:name=".Login.Login"/>
+        <activity android:name=".Activity_home"/>
+        <activity android:name=".Login.Login">
+        </activity>
     </application>
 
 </manifest>
