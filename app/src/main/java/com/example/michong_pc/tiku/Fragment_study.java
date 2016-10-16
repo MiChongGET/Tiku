@@ -17,6 +17,7 @@ import com.example.michong_pc.tiku.ViewFlipper.MyViewFlipper;
 import com.example.michong_pc.tiku.adapter.GridViewAdapter;
 import com.example.michong_pc.tiku.function_activity.Error_mode.Error_Chapter;
 import com.example.michong_pc.tiku.function_activity.Formulary.Formulay_chapter;
+import com.example.michong_pc.tiku.function_activity.Sign.Sign;
 import com.example.michong_pc.tiku.function_activity.Test_mode.Test;
 import com.example.michong_pc.tiku.function_activity.Train_mode.train;
 import com.example.michong_pc.tiku.function_activity.Chapter_mode.zhangjiexunlian;
@@ -112,6 +113,7 @@ public class Fragment_study extends android.support.v4.app.Fragment {
                         startActivity(new Intent(getActivity(),Error_Chapter.class));
                         break;
                     case 4:
+                        startActivity(new Intent(getActivity(), Sign.class));
                         break;
                     case 5:
                         startActivity(new Intent(getActivity(),Formulay_chapter.class));

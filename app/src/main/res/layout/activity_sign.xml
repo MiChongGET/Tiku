@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.michong_pc.tiku.drawlibrary.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:drawer="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/dial_drawer"
+    drawer:DrawerLayoutContent_ID="@+id/drawerContent"
+    drawer:DrawerLayoutHandler_ID="@+id/drawerHandle"
+    drawer:DrawerLayout_ID="@+id/drawer2"
+    android:background="#ffffff">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/main_view"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <include layout="@layout/toolbar2"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/toorbar2"
+            android:id="@+id/title_bar"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="练习题目"
+                android:textSize="16dp"
+                android:textColor="#8CDC86"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/textView"
+                android:layout_marginLeft="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:id="@+id/page"
+                android:layout_marginRight="67dp"
+                android:layout_marginEnd="67dp"
+                android:layout_alignTop="@+id/textView"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="/"
+                android:id="@+id/textView4"
+                android:layout_marginLeft="25dp"
+                android:layout_marginStart="25dp"
+                android:layout_alignTop="@+id/page"
+                android:layout_alignLeft="@+id/page"
+                android:layout_alignStart="@+id/page" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="11"
+                android:id="@+id/page_total"
+                android:layout_alignBaseline="@+id/textView4"
+                android:layout_alignBottom="@+id/textView4"
+                android:layout_toRightOf="@+id/textView4"
+                android:layout_toEndOf="@+id/textView4"
+                android:layout_marginLeft="9dp"
+                android:layout_marginStart="9dp" />
+        </RelativeLayout>
+        <com.example.michong_pc.tiku.ViewFlipper.MyViewFlipper
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:id="@+id/body_flipper"
+            android:background="#F3F4F6"
+            android:layout_below="@+id/title_bar">
+
+        </com.example.michong_pc.tiku.ViewFlipper.MyViewFlipper>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/key">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="上一题"
+                android:id="@+id/prev"
+                android:onClick="prev"
+                android:layout_weight="1"
+                android:background="@color/button_prev"
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/next"
+                android:text="下一题"
+                android:onClick="next"
+                android:layout_weight="1"
+                android:background="@color/button_prev"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:orientation="horizontal"
+            android:layout_below="@+id/body_flipper"
+
+            android:id="@+id/key">
+            <!--<ImageView-->
+                <!--android:layout_width="15dp"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:background="#00BB99"/>-->
+            <!--<EditText-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--style="?android:attr/textViewStyle"-->
+                <!--android:background="@null"-->
+                <!--android:hint="请输入你的答案"-->
+                <!--android:layout_weight="1"-->
+                <!--android:textSize="16dp"-->
+                <!--android:id="@+id/key_input"/>-->
+            <!--<Button-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:text="提交"/>-->
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/drawer2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <Button
+            android:id="@+id/drawerHandle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@string/app_name"
+            android:text="查看答案"
+            android:visibility="visible"
+
+           />
+
+        <LinearLayout
+            android:id="@+id/drawerContent"
+            android:layout_width="fill_parent"
+            android:layout_height="300dp"
+            android:layout_below="@+id/drawerHandle"
+            android:background="#8CDC86"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <io.github.kexanie.library.MathView
+                android:id="@+id/answer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+            </io.github.kexanie.library.MathView>
+        </LinearLayout>
+    </RelativeLayout>
+
+</com.example.michong_pc.tiku.drawlibrary.DrawerLayout>

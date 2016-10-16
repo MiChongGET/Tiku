@@ -14,8 +14,12 @@ import android.widget.Toast;
 
 import com.example.michong_pc.tiku.R;
 import com.example.michong_pc.tiku.adapter.ScoreAdapter;
+import com.example.michong_pc.tiku.bean.ScoreBean;
 import com.example.michong_pc.tiku.function_activity.Test_mode.Test;
 import com.example.michong_pc.tiku.function_activity.Test_mode.Test_chooce;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Result_score extends AppCompatActivity{
     private ScoreAdapter scoreAdapter;
@@ -50,8 +54,14 @@ public class Result_score extends AppCompatActivity{
     }
 
     private void iniView() {
+        List<ScoreBean> list  = new ArrayList<>();
+        for(int j=1;j<=(int)(Math.random()*10);j++){
+            ScoreBean bean = new ScoreBean();
+            bean.setNum(String.valueOf(j)+".");
+            list.add(bean);
+        }
         gridView = (GridView) findViewById(R.id.gridView2);
-        scoreAdapter = new ScoreAdapter(this);
+        scoreAdapter = new ScoreAdapter(this,list);
         gridView.setAdapter(scoreAdapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

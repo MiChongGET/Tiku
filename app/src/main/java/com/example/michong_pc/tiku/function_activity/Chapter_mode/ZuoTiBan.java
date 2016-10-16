@@ -1,7 +1,9 @@
 package com.example.michong_pc.tiku.function_activity.Chapter_mode;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -12,8 +14,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.michong_pc.tiku.JSON.HttpUtils;
 import com.example.michong_pc.tiku.R;
@@ -51,6 +55,7 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
     private Button choose;
     private String ID;
     private String chapter_url;
+    private int tihao;
     private Handler mHandler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -58,13 +63,39 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
             //在题板上添加问题
             mathView2 = (MathView) findViewById(R.id.question_ban);
             //这样写可以解决webview的异常,主要是多个webview不在同一个线程
+
             mathView2.setText(question_content[currentNumber-1]);
             page_total.setText(String.valueOf(question_num));
+
+            sign.setImageDrawable(getResources().getDrawable(R.drawable.no_start));
+            //flag标记符清除
+            flag=0;
+            sign.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(flag==0) {
+                        //标记题目
+                        ((ImageButton) v).setImageDrawable(getResources().getDrawable(R.drawable.start));
+                        Toast.makeText(ZuoTiBan.this,"标记题目",Toast.LENGTH_SHORT).show();
+                        flag=1;
+                    }else{
+                        //取消标记题目
+                        ((ImageButton) v).setImageDrawable(getResources().getDrawable(R.drawable.no_start));
+                        Toast.makeText(ZuoTiBan.this,"取消标记题目",Toast.LENGTH_SHORT).show();
+                        flag=0;
+                    }
+                }
+            });
 
         }
     };
 
     private String[] question_content;
+    private ImageButton sign;
+    private int flag=0;
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,18 +119,18 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
             }
         });
 
-        choose = (Button) findViewById(R.id.choose_question);
-        choose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ZuoTiBan.this, choose_question.class));
-            }
-        });
 
-
-        //题号，默认是第一题
-        currentNumber = 1;
-
+        //标记题目
+        sign = (ImageButton) findViewById(R.id.sign);
+//        mSharedPreferences = getSharedPreferences("question_id", Context.MODE_PRIVATE);
+//        mEditor = mSharedPreferences.edit();
+//        int num = mSharedPreferences.getInt("id",0);
+//
+//        //题号，默认是第一题
+//        if(num==0) {
+//            currentNumber = 1;
+//        }else{currentNumber=num;}
+        currentNumber=1;
         myViewFlipper = (MyViewFlipper) findViewById(R.id.body_flipper);
         myViewFlipper.setOnViewFlipperListener(this);
         myViewFlipper.addView(createView(currentNumber));
@@ -117,6 +148,21 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
 
             @Override
             public void drawerClosed() {
+            }
+        });
+        //选择题目
+        choose = (Button) findViewById(R.id.choose_question);
+        choose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ZuoTiBan.this,choose_question.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("question_id",question_num);
+                intent.putExtras(bundle);
+//                mEditor.clear();
+//                mEditor.commit();
+
+                startActivityForResult(intent,0);
             }
         });
     }
@@ -232,6 +278,7 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
     public void next(View source) {
         myViewFlipper.flingToNext();
         myViewFlipper.stopFlipping();
+
     }
 
 
@@ -253,6 +300,27 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
                     }
                 })
                 .show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (resultCode){
+            case 0:
+                Bundle bundle = data.getExtras();
+                currentNumber = bundle.getInt("tihao");
+                System.out.println("哈哈哈哈"+currentNumber);
+                mHandler.sendEmptyMessage(0);
+                page.setText(String.valueOf(currentNumber));
+                break;
+
+            case 1:
+                break;
+            default:
+                break;
+        }
+
     }
 }
 

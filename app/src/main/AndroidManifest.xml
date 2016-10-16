@@ -51,6 +51,7 @@
         <activity android:name=".Activity_home"/>
         <activity android:name=".Login.Login">
         </activity>
+        <activity android:name=".function_activity.Sign.Sign"/>
     </application>
 
 </manifest>

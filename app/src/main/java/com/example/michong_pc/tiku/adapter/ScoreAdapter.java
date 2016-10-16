@@ -20,15 +20,10 @@ public class ScoreAdapter extends BaseAdapter {
     private Context context;
     List<ScoreBean> list  = new ArrayList<>();
     //题目的数目
-    int i =25 ;
 
-    public ScoreAdapter(Context context){
+    public ScoreAdapter(Context context, List<ScoreBean> list ){
+        this.list=list;
         this.context = context;
-        for(int j=1;j<=i;j++){
-            ScoreBean bean = new ScoreBean();
-            bean.setNum(String.valueOf(j)+".");
-            list.add(bean);
-        }
 
     }
     @Override
