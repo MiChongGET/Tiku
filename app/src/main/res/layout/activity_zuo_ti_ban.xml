@@ -11,6 +11,8 @@
     drawer:DrawerLayout_ID="@+id/drawer2"
     android:background="#ffffff">
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,7 +20,8 @@
         android:id="@+id/main_view"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:weightSum="1">
         <include layout="@layout/toolbar2"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"/>
@@ -77,20 +80,58 @@
                 android:layout_marginLeft="9dp"
                 android:layout_marginStart="9dp" />
         </RelativeLayout>
+
+
         <com.example.michong_pc.tiku.ViewFlipper.MyViewFlipper
             android:layout_width="match_parent"
-            android:layout_height="280dp"
+            android:layout_height="250dp"
             android:id="@+id/body_flipper"
-            android:background="#F3F4F6"
-            android:layout_below="@+id/title_bar">
-
+            android:layout_marginTop="50dp"
+            android:layout_weight="0.21">
         </com.example.michong_pc.tiku.ViewFlipper.MyViewFlipper>
+
+        <ProgressBar
+                android:id="@+id/progressbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                />
+
+        <LinearLayout
+            android:id="@+id/edit_input"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/contact_edit_edittext_normal"
+            >
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="40dp"
+                android:background="#00BB99"/>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                style="?android:attr/textViewStyle"
+                android:background="@null"
+                android:hint="请输入你的答案"
+                android:layout_weight="1"
+                android:textSize="16dp"
+                android:id="@+id/key_input"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="提交"
+                android:background="@drawable/button_press2"/>
+
+        </LinearLayout>
+
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/key">
+            android:layout_below="@+id/key"
+            android:layout_marginTop="20dp"
+           >
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -99,6 +140,7 @@
                 android:onClick="prev"
                 android:layout_weight="1"
                 android:background="@color/button_prev"
+                android:enabled="false"
                 />
             <Button
                 android:layout_width="wrap_content"
@@ -109,8 +151,6 @@
                 android:layout_weight="1"
                 android:background="@color/button_prev"
                 />
-
-
         </LinearLayout>
 
         <LinearLayout
@@ -118,30 +158,11 @@
             android:layout_height="1dp"
             android:orientation="horizontal"
             android:layout_below="@+id/body_flipper"
-
             android:id="@+id/key">
-            <!--<ImageView-->
-                <!--android:layout_width="15dp"-->
-                <!--android:layout_height="40dp"-->
-                <!--android:background="#00BB99"/>-->
-            <!--<EditText-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="match_parent"-->
-                <!--style="?android:attr/textViewStyle"-->
-                <!--android:background="@null"-->
-                <!--android:hint="请输入你的答案"-->
-                <!--android:layout_weight="1"-->
-                <!--android:textSize="16dp"-->
-                <!--android:id="@+id/key_input"/>-->
-            <!--<Button-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:text="提交"/>-->
         </LinearLayout>
 
 
     </LinearLayout>
-
     <RelativeLayout
         android:id="@+id/drawer2"
         android:layout_width="fill_parent"
@@ -149,7 +170,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
-
         <Button
             android:id="@+id/drawerHandle"
             android:layout_width="wrap_content"
@@ -157,25 +177,62 @@
             android:layout_centerHorizontal="true"
             android:contentDescription="@string/app_name"
             android:text="查看答案"
-            android:visibility="visible"
-
-           />
-
+            android:visibility="invisible"
+            />
         <LinearLayout
             android:id="@+id/drawerContent"
             android:layout_width="fill_parent"
             android:layout_height="300dp"
             android:layout_below="@+id/drawerHandle"
             android:background="#8CDC86"
-            android:gravity="center"
             android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="请选择自己估计的分数:"
+                android:textColor="#ffff"
+                android:textSize="17dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/score_three"
+                    android:text="3"
+                    android:visibility="visible"
+                    />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/score_five"
+                    android:text="5"
+                    android:visibility="visible"
+                    />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/score_seven"
+                    android:text="7"
+                    android:layout_weight="1"
+                    android:visibility="visible"
+                    />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/score_ten"
+                    android:text="10"
+                    android:layout_weight="1"
+                    android:visibility="visible"
+                    />
+            </LinearLayout>
 
             <io.github.kexanie.library.MathView
                 android:id="@+id/answer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 >
-
             </io.github.kexanie.library.MathView>
         </LinearLayout>
     </RelativeLayout>

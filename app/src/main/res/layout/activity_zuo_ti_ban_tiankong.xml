@@ -14,7 +14,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:id="@+id/main_view">
+        android:id="@+id/main_view"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
         <include layout="@layout/toolbar2"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
@@ -36,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="填空题"
+                android:text="选择题"
                 android:textColor="#8CDC86"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
@@ -77,39 +80,26 @@
                 android:layout_marginLeft="9dp"
                 android:layout_marginStart="9dp" />
         </RelativeLayout>
+
+
         <com.example.michong_pc.tiku.ViewFlipper.MyViewFlipper
             android:layout_width="match_parent"
-            android:layout_height="280dp"
+            android:layout_height="300dp"
             android:id="@+id/body_flipper"
             android:background="#F3F4F6"
-            android:layout_below="@+id/title_bar">
-
+            >
         </com.example.michong_pc.tiku.ViewFlipper.MyViewFlipper>
+
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="1dp"
             android:orientation="horizontal"
             android:layout_below="@+id/body_flipper"
             android:id="@+id/key">
-            <ImageView
-                android:layout_width="15dp"
-                android:layout_height="40dp"
-                android:background="#00BB99"/>
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                style="?android:attr/textViewStyle"
-                android:background="@null"
-                android:hint="请输入你的答案"
-                android:layout_weight="1"
-                android:textSize="16dp"
-                android:id="@+id/key_input"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:text="提交"/>
         </LinearLayout>
-        <RelativeLayout
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#F3F4F6"
@@ -121,11 +111,9 @@
                 android:text="上一题"
                 android:id="@+id/prev"
                 android:onClick="prev"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="50dp"
-                android:layout_marginStart="50dp" />
+                android:layout_weight="1"
+                android:background="@color/button_prev"
+                />
 
             <Button
                 android:layout_width="wrap_content"
@@ -133,12 +121,10 @@
                 android:id="@+id/next"
                 android:text="下一题"
                 android:onClick="next"
-                android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/prev"
-                android:layout_toEndOf="@+id/prev"
-                android:layout_marginLeft="61dp"
-                android:layout_marginStart="61dp" />
-        </RelativeLayout>
+                android:layout_weight="1"
+                android:background="@color/button_prev"
+                />
+        </LinearLayout>
     </LinearLayout>
 
     <RelativeLayout
@@ -160,16 +146,9 @@
             android:layout_width="fill_parent"
             android:layout_height="300dp"
             android:layout_below="@+id/drawerHandle"
-            android:background="#D37126"
+            android:background="#8CDC86"
             android:gravity="center"
             android:orientation="vertical">
-
-            <Button
-                android:id="@+id/click"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="KEY" />
         </LinearLayout>
     </RelativeLayout>
 

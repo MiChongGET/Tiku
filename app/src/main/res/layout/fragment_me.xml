@@ -210,7 +210,9 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="#B7B7B7"></LinearLayout>
+        android:background="#B7B7B7">
+
+    </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"

@@ -161,6 +161,7 @@
 
            />
 
+
         <LinearLayout
             android:id="@+id/drawerContent"
             android:layout_width="fill_parent"
@@ -169,6 +170,33 @@
             android:background="#8CDC86"
             android:gravity="center"
             android:orientation="vertical">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/score_three"
+                android:text="3"
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/score_five"
+                android:layout_toEndOf="@+id/score_three"
+                android:text="5"
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/score_seven"
+                android:layout_toEndOf="@+id/score_five"
+                android:text="7"
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/score_ten"
+                android:layout_toEndOf="@+id/score_seven"
+                android:text="10"
+                />
 
             <io.github.kexanie.library.MathView
                 android:id="@+id/answer"

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="280dp"
+        android:background="@drawable/contact_edit_edittext_normal"
+        >
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="40dp"
+            android:background="#00BB99"/>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            style="?android:attr/textViewStyle"
+            android:background="@null"
+            android:hint="请输入你的答案"
+            android:layout_weight="1"
+            android:textSize="16dp"
+            android:id="@+id/key_input"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="提交"
+            android:background="@drawable/button_press2"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -29,7 +29,7 @@ public class Activity_home extends AppCompatActivity {
 
 // Create items
             AHBottomNavigationItem item1 = new AHBottomNavigationItem("学习", R.drawable.study, Color.parseColor("#455C65"));
-        AHBottomNavigationItem item2 = new AHBottomNavigationItem("社区", R.drawable.community, Color.parseColor("#00886A"));
+        //AHBottomNavigationItem item2 = new AHBottomNavigationItem("社区", R.drawable.community, Color.parseColor("#00886A"));
         AHBottomNavigationItem item3 = new AHBottomNavigationItem("我", R.drawable.me, Color.parseColor("#8B6B62"));
 
 // Add items
@@ -38,7 +38,7 @@ public class Activity_home extends AppCompatActivity {
 //        bottomNavigation.addItem(item3);
 
         bottomNavigationItems.add(item1);
-        bottomNavigationItems.add(item2);
+        //bottomNavigationItems.add(item2);
         bottomNavigationItems.add(item3);
         bottomNavigation.addItems(bottomNavigationItems);
         bottomNavigation.setColored(false);
@@ -66,11 +66,11 @@ public class Activity_home extends AppCompatActivity {
                         study = new Fragment_study();
                         getSupportFragmentManager().beginTransaction().replace(R.id.main_content,study).commit();
                         break;
+//                    case 1:
+//                        community = new Fragment_community();
+//                        getSupportFragmentManager().beginTransaction().replace(R.id.main_content,community).commit();
+//                        break;
                     case 1:
-                        community = new Fragment_community();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.main_content,community).commit();
-                        break;
-                    case 2:
                         me  = new Fragmemt_me();
                         getSupportFragmentManager().beginTransaction().replace(R.id.main_content,me).commit();
                         break;

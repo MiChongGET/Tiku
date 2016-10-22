@@ -41,7 +41,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="填    空    题"
+                android:text="选    择    题"
                 android:textSize="30dp"
                 android:textColor="#32C0A6"
                 android:layout_gravity="center"

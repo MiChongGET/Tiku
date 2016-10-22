@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+
+    <io.github.kexanie.library.MathView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/list_choose"
+        android:layout_marginLeft="21dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="7dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/radioButton"
+        android:layout_toEndOf="@+id/radioButton"
+        android:textAlignment="center"
+        android:background="#ff00">
+
+    </io.github.kexanie.library.MathView>
+
+</RelativeLayout>

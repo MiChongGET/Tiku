@@ -32,10 +32,11 @@ public class Fragment_study extends android.support.v4.app.Fragment {
     private ViewFlipper viewFlipper;
     private float startx;
     int[] images = new int[]{R.drawable.pic,R.drawable.pic,R.drawable.pic};
-    View root;
+    private View root;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
     }
 
@@ -72,11 +73,11 @@ public class Fragment_study extends android.support.v4.app.Fragment {
                             viewFlipper.showNext();
                         }
                         break;
-                        }
+                    }
                     case MotionEvent.ACTION_UP:{
                         break;
                     }
-                    }
+                }
                 return true;
             }
         });

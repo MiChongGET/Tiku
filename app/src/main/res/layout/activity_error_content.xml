@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.michong_pc.tiku.drawlibrary.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.michong_pc.tiku.drawlibrary.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:drawer="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:auto="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:id="@+id/dial_drawer"
     drawer:DrawerLayoutContent_ID="@+id/drawerContent"

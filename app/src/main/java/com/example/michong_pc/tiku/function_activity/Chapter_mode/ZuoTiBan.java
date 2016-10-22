@@ -1,9 +1,7 @@
 package com.example.michong_pc.tiku.function_activity.Chapter_mode;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -15,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,65 +36,77 @@ import static com.example.michong_pc.tiku.JSON.JSONError.removeBOM;
 public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewFlipperListener {
     private MyViewFlipper myViewFlipper;
     private int currentNumber;
-    private int question_num=0;
+    private int question_num = 0;
     private TextView page;
     private TextView page_total;
     private int total = 11;
     private DrawerLayout mDrawerLayout;
 
 
-    private MathView mathView;
     private MathView mathView2;
-//    private String answer = "This come from string. You can insert inline formula:" +
-//            " \\(ax^2 + bx + c = 0\\) " +
-//            "or displayed formula: $$\\sum_{i=0}^n i^2 = \\frac{(n^2+n)(2n+1)}{6}$$";
+    private String TAG = "哈哈哈";
 
-    private String question;
-    private String answer2;
     private String result = "";
     private Button choose;
     private String ID;
     private String chapter_url;
-    private int tihao;
-    private Handler mHandler = new Handler(){
+    private String[][] question_content;
+    private ImageButton sign;
+    private int flag = 0;
+
+    private ProgressBar mProgressBar;
+    private LinearLayout edit_input;
+    private Button prev;
+    private Button next;
+
+
+    //处理接收的网络数据
+    private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            //设置做题进度
+            mProgressBar.setMax(question_num);
+            mProgressBar.setProgress(currentNumber);
             //在题板上添加问题
             mathView2 = (MathView) findViewById(R.id.question_ban);
             //这样写可以解决webview的异常,主要是多个webview不在同一个线程
 
-            mathView2.setText(question_content[currentNumber-1]);
+            mathView2.setText(question_content[currentNumber - 1][0]);
             page_total.setText(String.valueOf(question_num));
 
             sign.setImageDrawable(getResources().getDrawable(R.drawable.no_start));
             //flag标记符清除
-            flag=0;
+            flag = 0;
             sign.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(flag==0) {
+                    if (flag == 0) {
                         //标记题目
                         ((ImageButton) v).setImageDrawable(getResources().getDrawable(R.drawable.start));
-                        Toast.makeText(ZuoTiBan.this,"标记题目",Toast.LENGTH_SHORT).show();
-                        flag=1;
-                    }else{
+                        Toast.makeText(ZuoTiBan.this, "标记题目", Toast.LENGTH_SHORT).show();
+                        flag = 1;
+                    } else {
                         //取消标记题目
                         ((ImageButton) v).setImageDrawable(getResources().getDrawable(R.drawable.no_start));
-                        Toast.makeText(ZuoTiBan.this,"取消标记题目",Toast.LENGTH_SHORT).show();
-                        flag=0;
+                        Toast.makeText(ZuoTiBan.this, "取消标记题目", Toast.LENGTH_SHORT).show();
+                        flag = 0;
                     }
                 }
             });
+            Log.i("题号。。。", "handleMessage: " + currentNumber);
+//            if(currentNumber<5) {
+//                getFragmentManager().beginTransaction().replace(R.id.ban,choose_fragment).commit();
+//            }else{
+//                getFragmentManager().beginTransaction().replace(R.id.ban, zm_fragment).commit();
+//            }
 
+
+            Panduan();
         }
     };
 
-    private String[] question_content;
-    private ImageButton sign;
-    private int flag=0;
-    private SharedPreferences mSharedPreferences;
-    private SharedPreferences.Editor mEditor;
+
 
 
     @Override
@@ -107,7 +119,6 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
         ID = b.getString("id");
         chapter_url = "http://tk.e8net.cn/ApiLibrary/getCatalogLibrary/id/"+ID;
 
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.id_tool_bar2);
         toolbar.setTitle(b.getString("capter"));
         setSupportActionBar(toolbar);
@@ -118,7 +129,6 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
                 onBackPressed();
             }
         });
-
 
         //标记题目
         sign = (ImageButton) findViewById(R.id.sign);
@@ -139,17 +149,36 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
         page_total.setText(String.valueOf(total));
 
 
+        //做题进度条使用
+        mProgressBar = (ProgressBar) findViewById(R.id.progressbar);
+
+        //答案输入的功能设置
+        edit_input = (LinearLayout) findViewById(R.id.edit_input);
+
+
+        //上一题下一题
+        prev = (Button) findViewById(R.id.prev);
+        next = (Button) findViewById(R.id.next);
+
+
         mDrawerLayout = (DrawerLayout) findViewById(R.id.dial_drawer);
+
+        //面板弹起
         mDrawerLayout.setInitialState(DrawerLayout.State.Close); //set drawer initial state: open or close
         mDrawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
             public void drawerOpened() {
+                Log.i(TAG, "drawerOpened: "+"面板弹起");
             }
 
             @Override
             public void drawerClosed() {
+                Log.i(TAG, "drawerOpened: "+"面板关闭");
             }
         });
+
+
+
         //选择题目
         choose = (Button) findViewById(R.id.choose_question);
         choose.setOnClickListener(new View.OnClickListener() {
@@ -159,9 +188,6 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
                 Bundle bundle = new Bundle();
                 bundle.putInt("question_id",question_num);
                 intent.putExtras(bundle);
-//                mEditor.clear();
-//                mEditor.commit();
-
                 startActivityForResult(intent,0);
             }
         });
@@ -191,30 +217,23 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
                     //获取题目的数目
                      question_num=jsonArray.length();
                      Log.i("题目数","共"+question_num+"个题目");
-                    question_content = new String[question_num];
-
+                    question_content = new String[question_num][2];
 
 
                     for(int i =0;i<question_num;i++){
                         JSONObject  jo = jsonArray.getJSONObject(i);
                         Log.i("第"+i+"个题目",jo.getString("content"));
                         //mList.add(jo.getString("formula"));
-                        question_content[i] = String.valueOf(i+1)+".  "+jo.getString("content");
+                        question_content[i][0] = String.valueOf(i+1)+".  "+jo.getString("content");
+                        question_content[i][1] = jo.getString("id");
                     }
 
-
+                    for(int i = 0;i<currentNumber;i++) {
+                        System.out.println("题目的ID" + question_content[i][1]);
+                    }
                     mHandler.sendEmptyMessage(0);
                     System.out.println("此页面"+currentNumber);
 
-
-//                    //在答案板上添加答案
-//                    mathView = (MathView) findViewById(R.id.answer);
-//                    mathView.post(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            mathView.setText(answer2);
-//                        }
-//                    });
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -266,26 +285,94 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
         currentNumber = currentNumber == 1 ? question_num : currentNumber - 1;
         return createView(currentNumber);
     }
+//
+//    //按钮控制得到上一个页面
+//    public void prev(View source) {
+//        myViewFlipper.flingToPrevious();
+//        myViewFlipper.stopFlipping();
+//
+//    }
+//
+//    //按钮获取下一个页面
+//    public void next(View source) {
+//        myViewFlipper.flingToNext();
+//        myViewFlipper.stopFlipping();
+//
+//    }
 
-    //按钮控制得到上一个页面
-    public void prev(View source) {
-        myViewFlipper.flingToPrevious();
-        myViewFlipper.stopFlipping();
 
+
+    public void Panduan(){
+        //设置跳转上一题下一题的功能
+        if (currentNumber > 1) {
+            //设置上一题按钮不可点击
+            prev.setEnabled(true);
+        }
+        //当题目为1时不可以点击
+        if (currentNumber == 1) {
+            prev.setEnabled(false);
+            Log.i(TAG, "onClick: " + currentNumber);
+        }
+
+        if (currentNumber < 5 && currentNumber > 0) {
+            prev.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    myViewFlipper.flingToPrevious();
+                    myViewFlipper.stopFlipping();
+
+                }
+            });
+
+            next.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    myViewFlipper.flingToNext();
+                    myViewFlipper.stopFlipping();
+                }
+            });
+        }
+        if (currentNumber >= 5 && currentNumber < question_num) {
+            //输入面板收起
+            edit_input.setVisibility(View.GONE);
+
+            //判断会不会
+            prev.setText("会");
+            //当会时，弹出面板输入分数
+            prev.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //面板打开
+                    mDrawerLayout.openDrawer();
+                }
+            });
+
+            //不会时，跳到下一题
+            next.setText("不会");
+            next.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    myViewFlipper.flingToNext();
+                    myViewFlipper.stopFlipping();
+                }
+            });
+
+        }
+        if (currentNumber == question_num) {
+            next.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onBackPressed();
+                }
+            });
+        }
     }
-
-    //按钮获取下一个页面
-    public void next(View source) {
-        myViewFlipper.flingToNext();
-        myViewFlipper.stopFlipping();
-
-    }
-
 
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this)
-                .setTitle("确定退出？")
+                .setTitle("确定所有的题目已经做完,确定退出？")
                 .setIcon(android.R.drawable.ic_menu_save)
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
@@ -310,9 +397,34 @@ public class ZuoTiBan extends AppCompatActivity implements MyViewFlipper.OnViewF
             case 0:
                 Bundle bundle = data.getExtras();
                 currentNumber = bundle.getInt("tihao");
-                System.out.println("哈哈哈哈"+currentNumber);
                 mHandler.sendEmptyMessage(0);
                 page.setText(String.valueOf(currentNumber));
+
+                //防止跳转之后出现填空和证明题答题界面的Bug
+                prev.setText("上一题");
+                next.setText("下一题");
+                edit_input.setVisibility(View.VISIBLE);
+//
+//                //
+//                //设置跳转上一题下一题的功能
+//                if (currentNumber>1) {
+//                    Log.i(TAG, "handleMessage: 有反应");
+//                    //设置上一题按钮不可点击
+//                    prev.setEnabled(true);
+//                    next.setEnabled(true);
+//                }
+//                //当题目为1时不可以点击
+//                if(currentNumber==1){
+//                    prev.setEnabled(false);
+//                    next.setEnabled(true);
+//                    Log.i(TAG, "onClick: "+currentNumber);
+//                }
+//                //所有的题目已经做完
+//                if (currentNumber==question_num){
+//                    Toast.makeText(ZuoTiBan.this,"所有的题目已经做完！！！",Toast.LENGTH_LONG).show();
+//
+//                }
+                Panduan();
                 break;
 
             case 1:
