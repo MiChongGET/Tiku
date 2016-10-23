@@ -24,7 +24,7 @@
             android:name=".function_activity.Chapter_mode.ZuoTiBan"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
-            android:name=".function_activity.Train_mode.Zuotiban_tiankongti"
+            android:name=".function_activity.Train_mode.Zuotiban_choose"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity android:name=".Result.Result_score"/>
         <activity android:name=".function_activity.Test_mode.Test"/>
@@ -52,6 +52,8 @@
         <activity android:name=".Login.Login">
         </activity>
         <activity android:name=".function_activity.Sign.Sign"/>
+        <activity android:name=".Jiaowuchu.WebView">
+        </activity>
     </application>
 
 </manifest>

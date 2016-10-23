@@ -23,12 +23,12 @@
             />
     </android.support.v7.widget.Toolbar>
 
-    <ViewFlipper
+    <com.example.michong_pc.tiku.Fragment.SlideShowView
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:id="@+id/pic"
         android:background="@drawable/pic">
-    </ViewFlipper>
+    </com.example.michong_pc.tiku.Fragment.SlideShowView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,7 +40,7 @@
     <GridView
         android:background="#ECECEC"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
 
         android:numColumns="3"
         android:horizontalSpacing="1dp"
@@ -51,13 +51,13 @@
         android:layout_width="match_parent"
         android:layout_height="5dp"
         android:background="#ECECEC"
-
         >
         </LinearLayout>
-    <!--<ImageView
+    <ImageView
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:id="@+id/imageView11"
-        android:background="@drawable/jiaowuchu"/>-->
+        android:id="@+id/jiaowuchu"
+        android:background="@drawable/jiaowuchu"/>
 
 </LinearLayout>

@@ -4,35 +4,31 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
-import android.widget.ViewFlipper;
 
-import com.example.michong_pc.tiku.ViewFlipper.MyViewFlipper;
+import com.example.michong_pc.tiku.Jiaowuchu.WebView;
 import com.example.michong_pc.tiku.adapter.GridViewAdapter;
+import com.example.michong_pc.tiku.function_activity.Chapter_mode.zhangjiexunlian;
 import com.example.michong_pc.tiku.function_activity.Error_mode.Error_Chapter;
 import com.example.michong_pc.tiku.function_activity.Formulary.Formulay_chapter;
 import com.example.michong_pc.tiku.function_activity.Sign.Sign;
 import com.example.michong_pc.tiku.function_activity.Test_mode.Test;
 import com.example.michong_pc.tiku.function_activity.Train_mode.train;
-import com.example.michong_pc.tiku.function_activity.Chapter_mode.zhangjiexunlian;
 
 /**
  * Created by MiChong-pc on 2016/5/21.
  */
 public class Fragment_study extends android.support.v4.app.Fragment {
-    private ImageView imageView;
     private GridView gridView;
     private GridViewAdapter adapter;
-    private ViewFlipper viewFlipper;
-    private float startx;
-    int[] images = new int[]{R.drawable.pic,R.drawable.pic,R.drawable.pic};
     private View root;
+    private ImageView mImageView;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,52 +40,16 @@ public class Fragment_study extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_study_two, container, false);
-        initView();
-
-        viewFlipper = (ViewFlipper) root.findViewById(R.id.pic);
-
-        for (int i=0;i<images.length;i++){
-            viewFlipper.addView(getImageView(images[i]));
-        }
-        viewFlipper.setInAnimation(getActivity(),R.anim.left_out);
-        viewFlipper.setFlipInterval(3000);
-        viewFlipper.startFlipping();
-        root.setOnTouchListener(new View.OnTouchListener() {
+        mImageView = (ImageView) root.findViewById(R.id.jiaowuchu);
+        mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()){
-                    case MotionEvent.ACTION_DOWN:
-                    {
-                        startx = event.getX();
-                        break;
-                    }
-                    case MotionEvent.ACTION_MOVE:{
-                        if (event.getX()-startx>100){
-                            viewFlipper.setInAnimation(getActivity(),R.anim.push_right_in);
-                            viewFlipper.showPrevious();
-                        }
-                        if(event.getX()-startx<100){
-                            viewFlipper.setInAnimation(getActivity(),R.anim.push_left_out);
-                            viewFlipper.showNext();
-                        }
-                        break;
-                    }
-                    case MotionEvent.ACTION_UP:{
-                        break;
-                    }
-                }
-                return true;
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),WebView.class));
             }
         });
+        initView();
         return root;
     }
-
-    private ImageView getImageView(int resId){
-        ImageView imageView = new ImageView(getActivity());
-        imageView.setBackgroundResource(resId);
-        return  imageView;
-    }
-
 
 
     private void initView() {
@@ -123,5 +83,4 @@ public class Fragment_study extends android.support.v4.app.Fragment {
             }
         });
     }
-
 }
